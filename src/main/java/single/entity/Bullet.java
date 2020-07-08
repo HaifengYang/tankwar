@@ -1,0 +1,168 @@
+package single.entity;
+
+import single.model.Model;
+import single.enums.ActorType;
+import single.enums.Direction;
+import single.utils.*;
+
+import java.awt.*;
+
+/**
+ * 子弹类
+ */
+public class Bullet implements Actor{
+	public final Rectangle map = new Rectangle(18, 18, 486, 486);
+	private final Rectangle border;
+	private final int direction;
+	private final int Speed;
+	private final int bulletPower;
+	public int xPos, yPos;
+	public Actor owner;
+	public Model gameModel;
+	public boolean hitTarget;
+
+	public Bullet(int a, int b, int c, int d, int e, Actor owner, Model gameModel){
+		this.owner = owner;
+		this.gameModel = gameModel;
+		xPos = a; yPos = b;
+		direction = c;
+		if(direction == Direction.DOWN.value() || direction == Direction.UP.value())
+			border = new Rectangle(a - 2, b - 5, 5, 13);
+		else
+			border = new Rectangle(a - 5, b - 2, 13, 5);
+
+		Speed = d;
+		bulletPower = e;
+		new AudioPlay(AudioUtil.FIRE).new AudioThread().start();
+	}
+
+	public void draw(Graphics g) {
+		g.setColor(Color.lightGray);
+		if(direction == Direction.DOWN.value() || direction == Direction.UP.value())
+			g.fillRect(border.x + 1, border.y +1, 3, 9);
+		if(direction == Direction.LEFT.value() || direction == Direction.RIGHT.value())
+			g.fillRect(border.x +1, border.y + 1, 9, 3);
+	}
+
+	public void move(){
+		if(gameModel.gamePaused){
+			return;
+		}
+
+		//检查这子弹是否撞击地图边界
+		if(!border.intersects(map)){
+			gameModel.removeActor(this);
+			notifiyOwner();
+			makeBomb();
+			return;
+		}
+		//检查这颗子弹是否击中其他对象
+		for(int i = 0; i < gameModel.actors.length; i++){
+			if(gameModel.actors[i] != null){
+				if(gameModel.actors[i] != this && gameModel.actors[i] != owner){
+					if(border.intersects(gameModel.actors[i].getBorder())){
+
+						if(gameModel.actors[i].getType()==ActorType.STEEL_WALL){
+							Steelwall temp = (Steelwall)gameModel.actors[i];
+							if(!temp.walldestoried){
+								temp.damageWall(border, bulletPower, direction);
+								if(temp.bulletdestoried)
+									hitTarget = true;
+							}
+						}else if(gameModel.actors[i].getType()==ActorType.WALL){
+							Wall temp = (Wall)gameModel.actors[i];
+							if(!temp.walldestoried){
+								temp.damageWall(border, bulletPower, direction);
+								if(temp.bulletdestoried)
+									hitTarget = true;
+							}
+						}else if(gameModel.actors[i].getType()==ActorType.BULLET){
+							Bullet temp = (Bullet)gameModel.actors[i];
+							if(temp.owner.getType()==ActorType.PLAYER){
+								hitTarget = true;
+								gameModel.removeActor(gameModel.actors[i]);
+								temp.notifiyOwner();
+							}
+						}else if(gameModel.actors[i].getType()==ActorType.PLAYER){
+							if(owner.getType()==ActorType.ENEMY){
+								Player temp = (Player)gameModel.actors[i];
+							    temp.hurt();
+							}
+							hitTarget = true;
+						}else if(gameModel.actors[i].getType()==ActorType.ENEMY && owner.getType()==ActorType.PLAYER){
+							Enemy temp = (Enemy)gameModel.actors[i];
+							Player tempe = (Player)owner;
+							if(temp.health == 0)
+								tempe.setScores(tempe.getScores() + temp.type*100);
+							temp.hurt();
+							hitTarget = true;
+						}else if(gameModel.actors[i].getType()==ActorType.BASE){
+							Base temp = (Base)gameModel.actors[i];
+							temp.doom();
+							hitTarget = true;
+							gameModel.gameOver = true;
+						}
+					}
+				}
+			}
+		}
+
+		//如果子弹打到其他对象,从游戏系统中删除这个子弹对象
+		if(hitTarget){
+			gameModel.removeActor(this);
+			notifiyOwner();
+			makeBomb();
+			return;
+		}
+
+		if(direction == 0){
+				border.y -= Speed;
+				yPos -= Speed;
+			}
+			if(direction == 1){
+				border.y += Speed;
+				yPos += Speed;
+			}
+			if(direction == 2){
+				border.x -= Speed;
+				xPos -= Speed;
+			}
+			if(direction == 3){
+				border.x += Speed;
+				xPos += Speed;
+		}
+	}
+
+
+	public Rectangle getBorder(){
+		return border;
+	}
+
+	public ActorType getType(){
+		return ActorType.BULLET;
+	}
+
+	public void notifiyOwner(){
+			if(owner != null){
+				if(owner.getType()==ActorType.PLAYER){
+					Player temp = (Player)owner;
+					temp.numberOfBulletIncrease();
+				}else if(owner.getType()==ActorType.ENEMY){
+					Enemy temp = (Enemy)owner;
+					temp.numberOfBullet++;
+				}
+			}
+	}
+
+	public void makeBomb(){
+		gameModel.addActor(new Bomb(xPos, yPos, "small", gameModel));
+	}
+
+	//未使用的方法
+	public Rectangle[] getDetailedBorder(){return null;}
+	public boolean wallDestroyed(){return false;}
+
+
+
+
+}
