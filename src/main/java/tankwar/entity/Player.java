@@ -1,10 +1,11 @@
-package single.entity;
+package tankwar.entity;
 
-import single.model.Model;
-import single.enums.ActorType;
-import single.enums.Direction;
-import single.utils.AudioPlay;
-import single.utils.AudioUtil;
+import tankwar.enums.BombType;
+import tankwar.model.Model;
+import tankwar.enums.ActorType;
+import tankwar.enums.Direction;
+import tankwar.utils.AudioPlay;
+import tankwar.utils.AudioUtil;
 
 import java.awt.*;
 
@@ -198,7 +199,7 @@ public class Player implements Actor {
                                     if (gameModel.actors[j] != null)
                                         if (gameModel.actors[j].getType()==ActorType.ENEMY) {
                                             Enemy tempe = (Enemy) gameModel.actors[j];
-                                            gameModel.addActor(new Bomb(tempe.xPos, tempe.yPos, "big", gameModel));
+                                            gameModel.addActor(new Bomb(tempe.xPos, tempe.yPos, BombType.BIG, gameModel));
                                             gameModel.removeActor(gameModel.actors[j]);
                                         }
                                 Level.NoOfEnemy = 0;
@@ -319,7 +320,8 @@ public class Player implements Actor {
         //只有吃掉超级星星时，玩家才会有2级的生命健康状态
         if (health == 1) {
             new AudioPlay(AudioUtil.BLAST).new AudioThread().start();//新建一个音效线程，用于播放音效
-            gameModel.addActor(new Bomb(xPos, yPos, "big", gameModel));
+
+            gameModel.addActor(new Bomb(xPos, yPos, BombType.BIG, gameModel));
             life--;
             if (life == 0) {
                 xPos = 100000;

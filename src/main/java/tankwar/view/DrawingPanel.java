@@ -1,7 +1,7 @@
-package single.view;
+package tankwar.view;
 
-import single.entity.Actor;
-import single.entity.Level;
+import tankwar.entity.Actor;
+import tankwar.entity.Level;
 
 import javax.swing.*;
 import java.awt.*;

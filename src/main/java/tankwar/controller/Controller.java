@@ -1,7 +1,7 @@
-package single.controller;
+package tankwar.controller;
 
-import single.model.Model;
-import single.view.View;
+import tankwar.model.Model;
+import tankwar.view.View;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,35 +10,32 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 //这个类处理来自视图的输入
-public class Controler {
+public class Controller {
     public View view;
     public Model model;
 
-    public Controler(View view, Model model) {
+    public Controller(View view, Model model) {
         this.view = view;
         this.model = model;
 
         //操作建立主机按钮的动作
         view.createServer.addActionListener(new ActionListener() {
-                                                public void actionPerformed(ActionEvent e) {
-                                                    if (!model.serverCreated)
-                                                        model.t.start();
-                                                }
-                                            }
-        );
+           public void actionPerformed(ActionEvent e) {
+               if (!model.serverCreated)
+                  model.t.start();
+           }
+        });
 
         //操作暂停/继续按钮的动作
         view.pauseAndResume.addActionListener(new ActionListener() {
                                                   public void actionPerformed(ActionEvent e) {
-                                                      model.pausePressed = true;
-                                                      ;
                                                       if (!model.gameOver && model.gameStarted) {
                                                           model.gamePaused = !model.gamePaused;
                                                       }
                                                   }
                                               }
         );
-        //操作帮助按钮的动作
+        //游戏重启按钮的动作
         view.newGame.addActionListener(new ActionListener() {
                                            public void actionPerformed(ActionEvent e) {
                                                model.serverVoteYes = true;
@@ -84,12 +81,6 @@ public class Controler {
                                          if (e.getKeyCode() == KeyEvent.VK_SPACE)
                                              model.player.setFire(true);
 
-                                         if (e.getKeyChar() == 'y' && model.gameOver && !model.serverVoteYes) {
-                                             model.serverVoteYes = true;
-                                         }
-
-                                         if (e.getKeyChar() == 'n' && model.gameOver)
-                                             model.serverVoteNo = true;
                                      }
                                  }
 

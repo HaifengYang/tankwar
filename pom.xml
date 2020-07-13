@@ -41,7 +41,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        single.view.View
+                                        tankwar.view.View
                                     </mainClass>
                                 </manifest>
                             </archive>

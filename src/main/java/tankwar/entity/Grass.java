@@ -1,6 +1,6 @@
-package single.entity;
+package tankwar.entity;
 
-import single.enums.ActorType;
+import tankwar.enums.ActorType;
 
 import java.awt.*;
 

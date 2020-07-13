@@ -1,7 +1,8 @@
-package single.entity;
+package tankwar.entity;
 
-import single.model.Model;
-import single.enums.ActorType;
+import tankwar.enums.BombType;
+import tankwar.model.Model;
+import tankwar.enums.ActorType;
 
 import java.awt.*;
 
@@ -11,20 +12,21 @@ import java.awt.*;
 public class Bomb implements Actor{
 	private int xPos, yPos;
 	private int animationTime;
-	public final Rectangle border = new Rectangle(0,0,0,0);
-	public String size;
-	public int inner, middle, outer, jumpDistance;
-	public Model gameModel;
+	private final Rectangle border = new Rectangle(0,0,0,0);
+	private final int inner;
+	private final int middle;
+	private final int outer;
+	private final int jumpDistance;
+	private final Model gameModel;
 
 
-	public Bomb(int a, int b, String size, Model gameModel){
-		this.size = size;
+	public Bomb(int a, int b, BombType size, Model gameModel){
 		this.gameModel = gameModel;
-		if(size.equals("big") ){
+		if(size == BombType.BIG ){
 			inner = 6;  middle = 9; outer = 14;
 			jumpDistance = 8;
 			animationTime = 6;
-		}else if(size.equals("small")){
+		}else{
 			inner = 2;  middle = 4; outer = 7;
 			jumpDistance = 4;
 			animationTime = 4;

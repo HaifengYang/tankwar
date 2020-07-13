@@ -1,9 +1,10 @@
-package single.entity;
+package tankwar.entity;
 
-import single.model.Model;
-import single.enums.ActorType;
-import single.enums.Direction;
-import single.utils.*;
+import tankwar.enums.BombType;
+import tankwar.model.Model;
+import tankwar.enums.ActorType;
+import tankwar.enums.Direction;
+import tankwar.utils.*;
 
 import java.awt.*;
 
@@ -11,29 +12,33 @@ import java.awt.*;
  * 子弹类
  */
 public class Bullet implements Actor{
-	public final Rectangle map = new Rectangle(18, 18, 486, 486);
+	private final Rectangle map = new Rectangle(18, 18, 486, 486);
 	private final Rectangle border;
 	private final int direction;
-	private final int Speed;
+	private final int speed;
 	private final int bulletPower;
-	public int xPos, yPos;
-	public Actor owner;
-	public Model gameModel;
-	public boolean hitTarget;
+	private int xPos, yPos;
+	private final Actor owner;
+	private final Model gameModel;
+	private boolean hitTarget;
 
-	public Bullet(int a, int b, int c, int d, int e, Actor owner, Model gameModel){
+	public Bullet(int xPos, int yPos, int direction, int speed, int bulletPower, Actor owner, Model gameModel){
+		new AudioPlay(AudioUtil.FIRE).new AudioThread().start();
+
 		this.owner = owner;
 		this.gameModel = gameModel;
-		xPos = a; yPos = b;
-		direction = c;
-		if(direction == Direction.DOWN.value() || direction == Direction.UP.value())
-			border = new Rectangle(a - 2, b - 5, 5, 13);
-		else
-			border = new Rectangle(a - 5, b - 2, 13, 5);
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.direction = direction;
+		if(this.direction == Direction.DOWN.value() || this.direction == Direction.UP.value()) {
+			this.border = new Rectangle(xPos - 2, yPos - 5, 5, 13);
+		}
+		else {
+			this.border = new Rectangle(xPos - 5, yPos - 2, 13, 5);
+		}
 
-		Speed = d;
-		bulletPower = e;
-		new AudioPlay(AudioUtil.FIRE).new AudioThread().start();
+		this.speed = speed;
+		this.bulletPower = bulletPower;
 	}
 
 	public void draw(Graphics g) {
@@ -63,17 +68,17 @@ public class Bullet implements Actor{
 					if(border.intersects(gameModel.actors[i].getBorder())){
 
 						if(gameModel.actors[i].getType()==ActorType.STEEL_WALL){
-							Steelwall temp = (Steelwall)gameModel.actors[i];
-							if(!temp.walldestoried){
-								temp.damageWall(border, bulletPower, direction);
-								if(temp.bulletdestoried)
+							SteelWall temp = (SteelWall)gameModel.actors[i];
+							if(!temp.isWallDestroyed()){
+								temp.damageWall(border, bulletPower);
+								if(temp.isBulletDestroyed())
 									hitTarget = true;
 							}
 						}else if(gameModel.actors[i].getType()==ActorType.WALL){
 							Wall temp = (Wall)gameModel.actors[i];
-							if(!temp.walldestoried){
+							if(!temp.wallDestroyed()){
 								temp.damageWall(border, bulletPower, direction);
-								if(temp.bulletdestoried)
+								if(temp.wallDestroyed())
 									hitTarget = true;
 							}
 						}else if(gameModel.actors[i].getType()==ActorType.BULLET){
@@ -116,20 +121,20 @@ public class Bullet implements Actor{
 		}
 
 		if(direction == 0){
-				border.y -= Speed;
-				yPos -= Speed;
+				border.y -= speed;
+				yPos -= speed;
 			}
 			if(direction == 1){
-				border.y += Speed;
-				yPos += Speed;
+				border.y += speed;
+				yPos += speed;
 			}
 			if(direction == 2){
-				border.x -= Speed;
-				xPos -= Speed;
+				border.x -= speed;
+				xPos -= speed;
 			}
 			if(direction == 3){
-				border.x += Speed;
-				xPos += Speed;
+				border.x += speed;
+				xPos += speed;
 		}
 	}
 
@@ -155,7 +160,7 @@ public class Bullet implements Actor{
 	}
 
 	public void makeBomb(){
-		gameModel.addActor(new Bomb(xPos, yPos, "small", gameModel));
+		gameModel.addActor(new Bomb(xPos, yPos, BombType.SMALL , gameModel));
 	}
 
 	//未使用的方法

@@ -1,12 +1,12 @@
-package single.model;
+package tankwar.model;
 
-import single.entity.Actor;
-import single.entity.Enemy;
-import single.entity.Level;
-import single.entity.Player;
-import single.utils.AudioPlay;
-import single.utils.AudioUtil;
-import single.view.View;
+import tankwar.entity.Actor;
+import tankwar.entity.Enemy;
+import tankwar.entity.Level;
+import tankwar.entity.Player;
+import tankwar.utils.AudioPlay;
+import tankwar.utils.AudioUtil;
+import tankwar.view.View;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,8 +22,7 @@ public class Model implements ActionListener {
     public boolean serverCreated;
     public boolean gamePaused;
     public boolean gameOver;
-    public boolean serverVoteYes, serverVoteNo;
-    public boolean pausePressed;
+    public boolean serverVoteYes;
     public Ticker t;
     /**
      * 播放gameOver的标识
@@ -52,8 +51,8 @@ public class Model implements ActionListener {
         player = new Player( this);
         addActor(player);
 
-        gameStarted = true;
         serverCreated = true;
+        gameStarted = true;
         view.mainPanel.actors = actors;
         view.mainPanel.gameStarted = true;
 
@@ -69,7 +68,7 @@ public class Model implements ActionListener {
 
         try {
             while (true) {
-                gamePause();
+                if (!gamePaused) gameFlow++;
                 gameOver();
                 winningCountHandle();
                 spawnEnemy();
@@ -90,7 +89,6 @@ public class Model implements ActionListener {
         } catch (Exception ex) {
             ex.printStackTrace();
             serverVoteYes = false;
-            serverVoteNo = false;
             serverCreated = false;
             gameStarted = false;
             gameOver = false;
@@ -136,14 +134,6 @@ public class Model implements ActionListener {
         }
     }
 
-    private void gamePause() {
-        if (gamePaused) {
-            pausePressed = false;
-        } else {
-            gameFlow++;
-        }
-    }
-
     private void gameOver() {
         if (gameOver || player.getLife() == 0) {
             gameOver = true;
@@ -153,9 +143,6 @@ public class Model implements ActionListener {
                 new AudioPlay(AudioUtil.GAMEOVER).new AudioThread().start();//新建一个音效线程，用于播放音效
                 isBroadcast = true;
             }
-            if (serverVoteNo)
-                System.exit(0);
-
             restart();
         }
     }
@@ -172,7 +159,6 @@ public class Model implements ActionListener {
             gameOver = false;
             serverVoteYes = false;
             isBroadcast = false;
-            serverVoteNo = false;
             Enemy.freezedMoment = 0;
             Enemy.freezedTime = 0;
             gameFlow = 0;

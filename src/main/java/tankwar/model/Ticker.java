@@ -1,4 +1,4 @@
-package single.model;
+package tankwar.model;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

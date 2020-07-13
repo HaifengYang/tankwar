@@ -1,7 +1,8 @@
-package single.entity;
+package tankwar.entity;
 
-import single.model.Model;
-import single.enums.ActorType;
+import tankwar.enums.BombType;
+import tankwar.model.Model;
+import tankwar.enums.ActorType;
 
 import java.awt.*;
 
@@ -35,22 +36,22 @@ public class Base implements Actor{
 	public void doom(){
 		base = gameModel.textures[1];
 		if(!baseKilled)
-			gameModel.addActor(new Bomb(xPos, yPos, "big", gameModel));
+			gameModel.addActor(new Bomb(xPos, yPos, BombType.BIG, gameModel));
 		baseKilled = true;
 	}
 
 	public void move(){
 		if(steelWallTime == 600){
-			Steelwall temp = new Steelwall(248, 498, 2, gameModel);
+			SteelWall temp = new SteelWall(248, 498, 2, gameModel);
 			gameModel.actors[0] = temp;
 
-			temp = new Steelwall(273, 498, 3, gameModel);
+			temp = new SteelWall(273, 498, 3, gameModel);
 			gameModel.actors[1] = temp;
 
-			temp = new Steelwall(248, 473, 1, gameModel);
+			temp = new SteelWall(248, 473, 1, gameModel);
 			gameModel.actors[2] = temp;
 
-			temp = new Steelwall(273, 473, 1, gameModel);
+			temp = new SteelWall(273, 473, 1, gameModel);
 			gameModel.actors[3] = temp;
 		}
 		if(steelWallTime> 0)

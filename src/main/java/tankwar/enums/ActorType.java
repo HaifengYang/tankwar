@@ -1,4 +1,4 @@
-package single.enums;
+package tankwar.enums;
 
 /**
  * 游戏各个元素的类型

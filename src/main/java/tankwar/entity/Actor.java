@@ -1,5 +1,5 @@
-package single.entity;//创建接口
-import single.enums.ActorType;
+package tankwar.entity;//创建接口
+import tankwar.enums.ActorType;
 
 import java.awt.*;
 

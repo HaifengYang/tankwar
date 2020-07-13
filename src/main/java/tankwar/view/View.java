@@ -1,7 +1,7 @@
-package single.view;
+package tankwar.view;
 
-import single.model.Model;
-import single.controller.Controler;
+import tankwar.model.Model;
+import tankwar.controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ public class View extends JFrame{
 	public DrawingPanel mainPanel;
 	public JButton createServer, exit, pauseAndResume, newGame, hiddenButton;
 
-	public Controler controler;
+	public Controller controler;
 	public Model model;
 
 	public View(){
@@ -65,7 +65,7 @@ public class View extends JFrame{
 		model = new Model(this);
 
 		//设置服务器控制器
-		controler = new Controler(this, model);
+		controler = new Controller(this, model);
 
 
 	}
