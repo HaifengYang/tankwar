@@ -69,7 +69,7 @@ public class Bullet implements Actor{
 
 						if(gameModel.actors[i].getType()==ActorType.STEEL_WALL){
 							SteelWall temp = (SteelWall)gameModel.actors[i];
-							if(!temp.isWallDestroyed()){
+							if(!temp.wallDestroyed()){
 								temp.damageWall(border, bulletPower);
 								if(temp.isBulletDestroyed())
 									hitTarget = true;
@@ -78,7 +78,7 @@ public class Bullet implements Actor{
 							Wall temp = (Wall)gameModel.actors[i];
 							if(!temp.wallDestroyed()){
 								temp.damageWall(border, bulletPower, direction);
-								if(temp.wallDestroyed())
+								if(temp.isBulletDestroyed())
 									hitTarget = true;
 							}
 						}else if(gameModel.actors[i].getType()==ActorType.BULLET){

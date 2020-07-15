@@ -81,43 +81,13 @@ public class Base implements Actor{
 		g.drawImage(base, xPos - 12, yPos - 12, null );
 	}
 
-	//未使用的方法
-	public Rectangle[] getDetailedBorder(){return null;}
-	public boolean wallDestroyed(){return false;}
-
-	public Image getBase() {
-		return base;
-	}
-
-	public void setBase(Image base) {
-		this.base = base;
-	}
-
-	public int getxPos() {
-		return xPos;
-	}
-
-	public int getyPos() {
-		return yPos;
-	}
-
-	public Model getGameModel() {
-		return gameModel;
-	}
-
-	public int getSteelWallTime() {
-		return steelWallTime;
-	}
-
 	public void setSteelWallTime(int steelWallTime) {
 		this.steelWallTime = steelWallTime;
 	}
 
-	public boolean isBaseKilled() {
-		return baseKilled;
-	}
+	//未使用的方法
+	public Rectangle[] getDetailedBorder(){return null;}
 
-	public void setBaseKilled(boolean baseKilled) {
-		this.baseKilled = baseKilled;
-	}
+	public boolean wallDestroyed(){return false;}
+
 }

@@ -58,7 +58,6 @@ public class Player implements Actor {
         xVPos = xPos;
         yVPos = yPos;
         border = new Rectangle(xPos - size, yPos - size, 25, 25);
-
     }
 
     @Override
@@ -417,120 +416,29 @@ public class Player implements Actor {
         return life;
     }
 
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-
-    public int getInvulnerableTime() {
-        return InvulnerableTime;
-    }
-
-    public void setInvulnerableTime(int invulnerableTime) {
-        InvulnerableTime = invulnerableTime;
-    }
-
-    public int getFreezed() {
-        return freezed;
-    }
-
     public void setFreezed(int freezed) {
         this.freezed = freezed;
-    }
-
-    public int getFreezedTime() {
-        return freezedTime;
-    }
-
-    public void setFreezedTime(int freezedTime) {
-        this.freezedTime = freezedTime;
-    }
-
-    public boolean getMoveUp() {
-        return moveUp;
     }
 
     public void setMoveUp(boolean moveUp) {
         this.moveUp = moveUp;
     }
 
-    public boolean getMoveDown() {
-        return moveDown;
-    }
 
     public void setMoveDown(boolean moveDown) {
         this.moveDown = moveDown;
-    }
-
-    public boolean getMoveLeft() {
-        return moveLeft;
     }
 
     public void setMoveLeft(boolean moveLeft) {
         this.moveLeft = moveLeft;
     }
 
-    public boolean getMoveRight() {
-        return moveRight;
-    }
-
     public void setMoveRight(boolean moveRight) {
         this.moveRight = moveRight;
     }
 
-    public boolean isFire() {
-        return fire;
-    }
-
     public void setFire(boolean fire) {
         this.fire = fire;
-    }
-
-    public int getNumberOfBullet() {
-        return numberOfBullet;
-    }
-
-    public void setNumberOfBullet(int numberOfBullet) {
-        this.numberOfBullet = numberOfBullet;
-    }
-
-    public int getCoolDownTime() {
-        return coolDownTime;
-    }
-
-    public void setCoolDownTime(int coolDownTime) {
-        this.coolDownTime = coolDownTime;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     public int getxPos() {
@@ -539,57 +447,5 @@ public class Player implements Actor {
 
     public void setxPos(int xPos) {
         this.xPos = xPos;
-    }
-
-    public int getyPos() {
-        return yPos;
-    }
-
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
-    }
-
-    public int getxVPos() {
-        return xVPos;
-    }
-
-    public void setxVPos(int xVPos) {
-        this.xVPos = xVPos;
-    }
-
-    public int getyVPos() {
-        return yVPos;
-    }
-
-    public void setyVPos(int yVPos) {
-        this.yVPos = yVPos;
-    }
-
-    public void setBorder(Rectangle border) {
-        this.border = border;
-    }
-
-    public Image getStandardImage() {
-        return standardImage;
-    }
-
-    public void setStandardImage(Image standardImage) {
-        this.standardImage = standardImage;
-    }
-
-    public Image[] getTextures() {
-        return textures;
-    }
-
-    public void setTextures(Image[] textures) {
-        this.textures = textures;
-    }
-
-    public Model getGameModel() {
-        return gameModel;
-    }
-
-    public void setGameModel(Model gameModel) {
-        this.gameModel = gameModel;
     }
 }

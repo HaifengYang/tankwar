@@ -1,5 +1,6 @@
 package tankwar.entity;
 
+import tankwar.enums.Orientation;
 import tankwar.model.Model;
 import tankwar.enums.ActorType;
 
@@ -12,7 +13,7 @@ public class SteelWall implements Actor{
 	private final int xPos;
 	private final int yPos;
 	private final Rectangle[] border = new Rectangle[4];
-	private final boolean[] shape = new boolean[4];
+	private final boolean[] shadow = new boolean[4];
 	private boolean wallDestroyed;
 	private boolean bulletDestroyed;
 	private final Image steelWall;
@@ -34,54 +35,51 @@ public class SteelWall implements Actor{
 		this.yPos = yPos;
 		steelWall = gameModel.textures[53];
 		generalBorder = new Rectangle(this.xPos - 12, this.yPos - 12, 25, 25);
-		//上
-		if(orientation == 0){
+		if(orientation == Orientation.UP.value()){
 			//左上角
 			border[0] = new Rectangle(this.xPos - 11, this.yPos - 11, 11, 11);
 			//右上角
 			border[1] = new Rectangle(this.xPos + 1, this.yPos - 11, 11, 11);
 
-				shape[2] = true;
-				shape[3] = true;
+				shadow[2] = true;
+				shadow[3] = true;
 		}
-		//下
-		if(orientation == 1){
+		if(orientation == Orientation.DOWN.value()){
 			//左下角
 			border[2] = new Rectangle(this.xPos - 11, this.yPos + 1, 11, 11);
 			//右下角
 			border[3] = new Rectangle(this.xPos + 1, this.yPos + 1, 11, 11);
-				shape[0] = true;
-				shape[1] = true;
+				shadow[0] = true;
+				shadow[1] = true;
 		}
-		//左
-		if(orientation == 2){
+		if(orientation == Orientation.LEFT.value()){
 			//左上角
 			border[0] = new Rectangle(this.xPos - 11, this.yPos - 11, 11, 11);
 			//左下角
 			border[2] = new Rectangle(this.xPos - 11, this.yPos + 1, 11, 11);
-				shape[1] = true;
-				shape[3] = true;
+				shadow[1] = true;
+				shadow[3] = true;
 		}
-		//右
-		if(orientation == 3){
+		if(orientation == Orientation.RIGHT.value()){
 			//右上角
 			border[1] = new Rectangle(this.xPos + 1, this.yPos - 11, 11, 11);
 			//右下角
 			border[3] = new Rectangle(this.xPos + 1, this.yPos + 1, 11, 11);
-				shape[0] = true;
-				shape[2] = true;
+				shadow[0] = true;
+				shadow[2] = true;
 		}
 	}
 
 
 	public void damageWall(Rectangle bullet, int bulletpower){
+		bulletDestroyed = false;
 		if(bulletpower == 2){
 			for(int i = 0; i < 4; i++){
 				if(border[i] != null){
 					if(bullet.intersects(border[i])){
 						bulletDestroyed = true;
 						border[i] = null;
-						shape[i] = true;
+						shadow[i] = true;
 					}
 				}
 			}
@@ -97,12 +95,10 @@ public class SteelWall implements Actor{
 	}
 
 	public boolean wallDestroyed(){
-		if(wallDestroyed)
-			return true;
-		boolean walldestory = false;
+		if(wallDestroyed) return true;
 		if(border[0] == null && border[1] == null && border[2] == null && border[3] == null)
-			walldestory = true;
-		return walldestory;
+			wallDestroyed = true;
+		return wallDestroyed;
 	}
 
 	public Rectangle getBorder(){
@@ -119,13 +115,13 @@ public class SteelWall implements Actor{
 
 		g.drawImage(steelWall, xPos - 12, yPos - 12, null);
 		g.setColor(new Color(128, 64, 0));
-		if(shape[0])
+		if(shadow[0])
 			g.fillRect(xPos - 12, yPos - 12, 13, 13);
-		if(shape[1])
+		if(shadow[1])
 			g.fillRect(xPos, yPos - 12, 13, 13);
-		if(shape[2])
+		if(shadow[2])
 			g.fillRect(xPos - 12, yPos, 13, 13);
-		if(shape[3])
+		if(shadow[3])
 			g.fillRect(xPos, yPos, 13, 13);
 	}
 
@@ -133,15 +129,11 @@ public class SteelWall implements Actor{
 		return ActorType.STEEL_WALL;
 	}
 
-
-	//未使用的方法
-	public void move(){}
-
-	public boolean isWallDestroyed() {
-		return wallDestroyed;
-	}
-
 	public boolean isBulletDestroyed() {
 		return bulletDestroyed;
 	}
+
+	//未使用的方法
+
+	public void move(){}
 }
