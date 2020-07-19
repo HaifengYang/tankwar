@@ -11,7 +11,7 @@ public class Level {
 	public static int enemySpawnTime = 150;
 	public static int enemyLeft = 20;
 	public static int deathCount = 0;
-	public static int maxNoEnemy = 4;
+	public static int maxNoEnemy = 2;
 	public static int NoOfEnemy = 0;
 	public static int[] enemySequence;
 

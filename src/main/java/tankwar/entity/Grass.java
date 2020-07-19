@@ -8,9 +8,9 @@ import java.awt.*;
  * 草丛类
  */
 public class Grass implements Actor{
-	private int xPos;
-	private int yPos;
-	public Rectangle border;
+	private final int xPos;
+	private final int yPos;
+	private final Rectangle border;
 
 	public Grass(int a, int b){
 		xPos = a;

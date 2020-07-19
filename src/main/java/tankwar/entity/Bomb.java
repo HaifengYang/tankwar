@@ -19,8 +19,7 @@ public class Bomb implements Actor{
 	private final int jumpDistance;
 	private final Model gameModel;
 
-
-	public Bomb(int a, int b, BombType size, Model gameModel){
+	public Bomb(int xPos, int yPos, BombType size, Model gameModel){
 		this.gameModel = gameModel;
 		if(size == BombType.BIG ){
 			inner = 6;  middle = 9; outer = 14;
@@ -32,10 +31,9 @@ public class Bomb implements Actor{
 			animationTime = 4;
 		}
 
-		xPos = a;
-		yPos = b;
+		this.xPos = xPos;
+		this.yPos = yPos;
 	}
-
 	public void draw(Graphics g){
 		g.setColor(Color.red);
 		g.fillOval(xPos-outer, yPos-outer, 2*outer, 2*outer);
@@ -44,12 +42,10 @@ public class Bomb implements Actor{
 		g.setColor(Color.yellow);
 		g.fillOval(xPos-inner, yPos-inner, 2*inner, 2*inner);
 	}
-
 	public void move(){
 		if(gameModel.gamePaused){
 			return;
 		}
-
 		animationTime--;
 		if(animationTime < 0){
 			gameModel.removeActor(this);
@@ -67,7 +63,6 @@ public class Bomb implements Actor{
 	public ActorType getType(){
 		return ActorType.BOMB;
 	}
-
 
 	//未使用的方法
 	public Rectangle[] getDetailedBorder(){return null;}

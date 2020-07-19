@@ -16,10 +16,7 @@ public class View extends JFrame{
 	public Model model;
 
 	public View(){
-
 		super("坦克大战");
-
-
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) { }
@@ -66,15 +63,9 @@ public class View extends JFrame{
 
 		//设置服务器控制器
 		controler = new Controller(this, model);
-
-
 	}
-
 
 	public static void main(String[] args){
 		new View();
 	}
-
-
-
 }

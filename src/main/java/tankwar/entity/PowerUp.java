@@ -4,6 +4,7 @@ import tankwar.model.Model;
 import tankwar.enums.ActorType;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * 增强类
@@ -24,24 +25,24 @@ public class PowerUp implements Actor{
 		for(int i = 0; i < 7; i ++)
 			textures[i] = gameModel.textures[46+i];
 
-		xPos = 24 + (int)(Math.random()*475);
-		yPos = 24 + (int)(Math.random()*475);
-		int a = (int)(Math.random()*21);
+		xPos = 24 + new Random().nextInt(475);
+		yPos = 24 + new Random().nextInt(475);
+		int a =  new Random().nextInt(17);
 		if(0 <= a && a< 3)
 			function = 0;
-		if(3 <= a && a < 6)
+		else if(3 <= a && a < 6)
 			function = 1;
-		if(6 <= a && a < 9)
+		else if(6 <= a && a < 9)
 			function = 2;
-		if(9 <= a && a< 12)
+		else if(9 <= a && a< 12)
 			function = 3;
-		if(12 <= a && a < 15)
+		else if(12 <= a && a < 15)
 			function = 4;
-		if(15 <= a && a < 18)
+		else if(15 == a)
 			function = 5;
-		if(18 <= a && a < 21)
+		else if(16 == a)
 			function = 6;
-		displayTime = 300 + (int)(Math.random()*630);
+		displayTime = 300 + new Random().nextInt(300);
 		border= new Rectangle(xPos - 12, yPos -12, 25, 25);
 	}
 

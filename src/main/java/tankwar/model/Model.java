@@ -27,7 +27,7 @@ public class Model implements ActionListener {
     /**
      * 播放gameOver的标识
      */
-    private boolean isBroadcast = false;
+    private boolean isBroadcastGameOver = false;
     public Image[] textures;
 
     public static int gameFlow;
@@ -61,10 +61,10 @@ public class Model implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        createServer();
-
-        if (!serverCreated)
+        if (!serverCreated) {
+            createServer();
             return;
+        }
 
         try {
             while (true) {
@@ -139,9 +139,9 @@ public class Model implements ActionListener {
             gameOver = true;
             player.setFreezed(1);
 
-            if (!isBroadcast){
+            if (!isBroadcastGameOver){
                 new AudioPlay(AudioUtil.GAMEOVER).new AudioThread().start();//新建一个音效线程，用于播放音效
-                isBroadcast = true;
+                isBroadcastGameOver = true;
             }
             restart();
         }
@@ -158,7 +158,7 @@ public class Model implements ActionListener {
             Level.loadLevel(this);
             gameOver = false;
             serverVoteYes = false;
-            isBroadcast = false;
+            isBroadcastGameOver = false;
             Enemy.freezedMoment = 0;
             Enemy.freezedTime = 0;
             gameFlow = 0;

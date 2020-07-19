@@ -13,7 +13,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class AudioUtil{
-	public static final String BASE_PATH = "";
+	public static final String BASE_PATH = "/";
 	/**
 	 * 坦克诞生音效
 	 */

@@ -1,13 +1,12 @@
 package tankwar.entity;
 
-import tankwar.enums.BombType;
+import tankwar.enums.*;
 import tankwar.model.Model;
-import tankwar.enums.ActorType;
-import tankwar.enums.Direction;
 import tankwar.utils.AudioPlay;
 import tankwar.utils.AudioUtil;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * 玩家类
@@ -17,11 +16,10 @@ public class Player implements Actor {
     private final Rectangle map = new Rectangle(35, 35, 452, 452);
     private int scores;
     private int life;
-    private int speed ;
+    private int speed;
     private int direction;
-    private int InvulnerableTime;
+    private int invulnerableTime;
     private int freezed;
-    private int freezedTime;
     private boolean moveUp;
     private boolean moveDown;
     private boolean moveLeft;
@@ -33,9 +31,9 @@ public class Player implements Actor {
     private int health;
     private int xPos, yPos, xVPos, yVPos;
     private Rectangle border;
-    private Image standardImage;
-    private Image[] textures;
-    private Model gameModel;
+    private final Image standardImage;
+    private final Image[] textures;
+    private final Model gameModel;
 
     public Player(Model gameModel) {
         life = 3;
@@ -43,7 +41,7 @@ public class Player implements Actor {
         status = 1;
         health = 1;
         numberOfBullet = 1;
-        InvulnerableTime = 150;
+        invulnerableTime = 150;
         this.gameModel = gameModel;
 
         textures = new Image[4];
@@ -52,7 +50,7 @@ public class Player implements Actor {
         yPos = 498;
         //玩家1的图像
         for (int i = 0; i < 4; i++)
-            textures[i] = gameModel.textures[54 + i];
+            textures[i] = gameModel.textures[18 + i];
         standardImage = textures[0];
 
         xVPos = xPos;
@@ -69,14 +67,12 @@ public class Player implements Actor {
         if (coolDownTime > 0) {
             coolDownTime--;
         }
-        if (InvulnerableTime > 0) {
-            InvulnerableTime--;
+        if (invulnerableTime > 0) {
+            invulnerableTime--;
         }
-
         if (freezed == 1) {
             return;
         }
-
         //如果玩家点击“开火”键，并且满足条件，则创建一个子弹目标（即发射子弹）
         if (fire && coolDownTime == 0 && numberOfBullet > 0) {
             //子弹方向
@@ -100,19 +96,19 @@ public class Player implements Actor {
             int d;
             if (status == 1) {
                 numberOfBullet = 1;
-                d = 7;
+                d = BulletSpeed.NORMAL.type();
             } else {
-                d = 12;
+                d = BulletSpeed.ENHANCED.type();
             }
             //子弹能力
-            int e;
+            int bulletPower;
             if (status == 4) {
-                e = 2;
+                bulletPower = BulletPower.ENHANCED.type();
             } else {
-                e = 1;
+                bulletPower = BulletPower.NORMAL.type();
             }
             //添加子弹
-            gameModel.addActor(new Bullet(a, b, c, d, e, this, gameModel));
+            gameModel.addActor(new Bullet(a, b, c, d, bulletPower, this, gameModel));
             //coolDownTime是你要等到你可以发射第二颗子弹时间（与魔兽争霸3相同）
             if (status > 2) {
                 coolDownTime = 5;
@@ -162,7 +158,7 @@ public class Player implements Actor {
             if (speed > 0)
                 speed--;
         } else {
-            if (speed < 3)
+            if (speed < 4)
                 speed++;
         }
 
@@ -204,9 +200,9 @@ public class Player implements Actor {
                                 Level.NoOfEnemy = 0;
                                 Level.deathCount = 20 - Level.enemyLeft;
                             } else if (function == 3) {   //防护盾，刀枪不入
-                                InvulnerableTime = 300 + (int) Math.random() * 400;
+                                invulnerableTime = 300 + new Random().nextInt(400);
                             } else if (function == 4) {  //冻结所有敌人
-                                Enemy.freezedTime = 300 + (int) Math.random() * 400;
+                                Enemy.freezedTime = 300 + new Random().nextInt(400);
                                 Enemy.freezedMoment = Model.gameFlow;
                             } else if (function == 5) { //超级星星
                                 if (status < 3)
@@ -214,7 +210,7 @@ public class Player implements Actor {
                                 status = 4;
                                 health = 2;
                                 for (int j = 0; j < 4; j++)
-                                    textures[j] = gameModel.textures[66 + j];
+                                    textures[j] = gameModel.textures[84 + j];
 
                             } else if (function == 6) {  // 增加生命
                                 life++;
@@ -287,7 +283,7 @@ public class Player implements Actor {
     public void draw(Graphics g) {
         //绘制玩家坦克
         g.drawImage(textures[direction], xPos - size, yPos - size, null);
-        if (InvulnerableTime > 0) {
+        if (invulnerableTime > 0) {
             g.setColor(Color.red);
             g.drawRect(xPos - 12, yPos - 12, 25, 25);
             g.drawRect(xPos - 11, yPos - 11, 23, 23);
@@ -312,7 +308,7 @@ public class Player implements Actor {
     }
 
     public void hurt() {
-        if (InvulnerableTime != 0)
+        if (invulnerableTime != 0)
             return;
 
         //如果坦克只有1级的健康状态，被击中，那么玩家坦克失去一个生命，如果玩家坦克是最后一次生命，被击中，则game over
@@ -333,7 +329,7 @@ public class Player implements Actor {
                 status = 1;
                 health = 1;
                 numberOfBullet = 1;
-                InvulnerableTime = 150;
+                invulnerableTime = 150;
 
                 xPos = 198;
                 yPos = 498;
@@ -341,14 +337,14 @@ public class Player implements Actor {
                 xVPos = xPos;
                 yVPos = yPos;
                 for (int i = 0; i < 4; i++)
-                    textures[i] = gameModel.textures[54 + i];
+                    textures[i] = gameModel.textures[76 + i];
             }
         } else {
             new AudioPlay(AudioUtil.HIT).new AudioThread().start();
             health--;
             status = 3;
             for (int i = 0; i < 4; i++)
-                textures[i] = gameModel.textures[62 + i];
+                textures[i] = gameModel.textures[80 + i];
         }
     }
 
@@ -357,22 +353,22 @@ public class Player implements Actor {
         if (status == 1) {
             status = 2;
             for (int i = 0; i < 4; i++)
-                textures[i] = gameModel.textures[58 + i];
+                textures[i] = gameModel.textures[76 + i];
         } else if (status == 2) {
             status = 3;
             numberOfBullet++;
             for (int i = 0; i < 4; i++)
-                textures[i] = gameModel.textures[62 + i];
+                textures[i] = gameModel.textures[80 + i];
         } else if (status == 3) {
             status = 4;
             for (int i = 0; i < 4; i++)
-                textures[i] = gameModel.textures[66 + i];
+                textures[i] = gameModel.textures[84 + i];
         }
     }
 
     public void reset() {
         direction = Direction.UP.value();
-        InvulnerableTime = 150;
+        invulnerableTime = 150;
         xPos = 198;
         yPos = 498;
 
@@ -398,14 +394,6 @@ public class Player implements Actor {
 
     public void setScores(int scores) {
         this.scores = scores;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public Rectangle getMap() {
-        return map;
     }
 
     public int getScores() {

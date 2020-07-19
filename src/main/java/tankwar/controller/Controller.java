@@ -23,6 +23,7 @@ public class Controller {
            public void actionPerformed(ActionEvent e) {
                if (!model.serverCreated)
                   model.t.start();
+//               model.startGame(e);
            }
         });
 

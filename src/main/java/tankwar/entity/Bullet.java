@@ -120,19 +120,19 @@ public class Bullet implements Actor{
 			return;
 		}
 
-		if(direction == 0){
+		if(direction == Direction.UP.value()){
 				border.y -= speed;
 				yPos -= speed;
 			}
-			if(direction == 1){
+			if(direction == Direction.DOWN.value()){
 				border.y += speed;
 				yPos += speed;
 			}
-			if(direction == 2){
+			if(direction == Direction.LEFT.value()){
 				border.x -= speed;
 				xPos -= speed;
 			}
-			if(direction == 3){
+			if(direction == Direction.RIGHT.value()){
 				border.x += speed;
 				xPos += speed;
 		}
@@ -166,8 +166,4 @@ public class Bullet implements Actor{
 	//未使用的方法
 	public Rectangle[] getDetailedBorder(){return null;}
 	public boolean wallDestroyed(){return false;}
-
-
-
-
 }
