@@ -60,7 +60,7 @@ public class Player implements Actor {
 
     @Override
     public void move() {
-        if (gameModel.gamePaused) {
+        if (gameModel.isGamePaused()) {
             return;
         }
 

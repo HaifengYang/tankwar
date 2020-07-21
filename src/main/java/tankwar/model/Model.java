@@ -18,12 +18,12 @@ import java.awt.event.ActionListener;
 public class Model implements ActionListener {
     public View view;
 
-    public boolean gameStarted;
-    public boolean serverCreated;
-    public boolean gamePaused;
-    public boolean gameOver;
-    public boolean serverVoteYes;
-    public Ticker t;
+    private boolean gameStarted;
+    private boolean serverCreated;
+    private boolean gamePaused;
+    private boolean gameOver;
+    private volatile boolean serverVoteYes;
+    private Ticker t;
     /**
      * 播放gameOver的标识
      */
@@ -34,8 +34,14 @@ public class Model implements ActionListener {
     public Actor[] actors;
     public Player player;
 
+    public String[] messageQueue;
+    public int messageIndex;
+
     public Model(View view) {
         this.view = view;
+        messageQueue = new String[8];
+        serverVoteYes = false;
+        view.mainPanel.messageQueue = messageQueue;
         t = new Ticker(1000);
         t.addActionListener(this);
     }
@@ -48,7 +54,7 @@ public class Model implements ActionListener {
         actors = new Actor[400];
         Level.loadLevel(this);
 
-        player = new Player( this);
+        player = new Player(this);
         addActor(player);
 
         serverCreated = true;
@@ -61,18 +67,18 @@ public class Model implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (!serverCreated) {
-            createServer();
-            return;
-        }
-
+        createServer();
         try {
             while (true) {
                 if (!gamePaused) gameFlow++;
                 gameOver();
+                restart();
                 winningCountHandle();
                 spawnEnemy();
                 acotorsMove();
+
+                if (gameFlow % 300 == 0)
+                    removeMessage();
 
                 view.mainPanel.repaint();
 
@@ -88,7 +94,6 @@ public class Model implements ActionListener {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            serverVoteYes = false;
             serverCreated = false;
             gameStarted = false;
             gameOver = false;
@@ -96,7 +101,6 @@ public class Model implements ActionListener {
             Enemy.freezedTime = 0;
             Enemy.freezedMoment = 0;
             view.mainPanel.gameStarted = false;
-            t.stop();
 
             player = null;
             Level.reset();
@@ -139,29 +143,30 @@ public class Model implements ActionListener {
             gameOver = true;
             player.setFreezed(1);
 
-            if (!isBroadcastGameOver){
+            if (!isBroadcastGameOver) {
                 new AudioPlay(AudioUtil.GAMEOVER).new AudioThread().start();//新建一个音效线程，用于播放音效
                 isBroadcastGameOver = true;
             }
-            restart();
         }
     }
 
-    private void restart() {
+    public void restart() {
         if (serverVoteYes) {
             player = new Player(this);
-            if (player.getLife() == 0){
+            if (player.getLife() == 0) {
                 Level.reset();
-            }else {
+            } else {
                 Level.goOn();
             }
             Level.loadLevel(this);
             gameOver = false;
-            serverVoteYes = false;
             isBroadcastGameOver = false;
             Enemy.freezedMoment = 0;
             Enemy.freezedTime = 0;
             gameFlow = 0;
+            serverVoteYes = false;
+
+            new AudioPlay(AudioUtil.START).new AudioThread().start();// 播放背景音效
         }
     }
 
@@ -182,4 +187,58 @@ public class Model implements ActionListener {
             }
     }
 
+    public void addMessage(String message) {
+        if (messageIndex < 8) {
+            messageQueue[messageIndex] = message;
+            messageIndex++;
+        } else {
+            for (int i = 0; i < 7; i++)
+                messageQueue[i] = messageQueue[i + 1];
+            messageQueue[7] = message;
+        }
+
+        if (!gameStarted)
+            view.mainPanel.repaint();
+    }
+
+    public void removeMessage() {
+        if (messageIndex == 0)
+            return;
+
+        messageIndex--;
+        for (int i = 0; i < messageIndex; i++)
+            messageQueue[i] = messageQueue[i + 1];
+        messageQueue[messageIndex] = null;
+
+        if (!gameStarted)
+            view.mainPanel.repaint();
+    }
+
+    public void setServerVoteYes(boolean serverVoteYes) {
+        this.serverVoteYes = serverVoteYes;
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
+
+    public void setGameStarted(boolean gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
+    public boolean isGamePaused() {
+        return gamePaused;
+    }
+
+    public void setGamePaused(boolean gamePaused) {
+        this.gamePaused = gamePaused;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
 }

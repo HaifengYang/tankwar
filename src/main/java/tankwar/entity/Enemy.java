@@ -82,7 +82,7 @@ public class Enemy implements Actor {
     }
 
     public void move() {
-        if (gameModel.gamePaused) {
+        if (gameModel.isGamePaused()) {
             return;
         }
 

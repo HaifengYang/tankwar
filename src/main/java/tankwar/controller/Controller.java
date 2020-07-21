@@ -18,20 +18,11 @@ public class Controller {
         this.view = view;
         this.model = model;
 
-        //操作建立主机按钮的动作
-        view.createServer.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               if (!model.serverCreated)
-                  model.t.start();
-//               model.startGame(e);
-           }
-        });
-
         //操作暂停/继续按钮的动作
         view.pauseAndResume.addActionListener(new ActionListener() {
                                                   public void actionPerformed(ActionEvent e) {
-                                                      if (!model.gameOver && model.gameStarted) {
-                                                          model.gamePaused = !model.gamePaused;
+                                                      if (!model.isGameOver() && model.isGameStarted()) {
+                                                          model.setGamePaused(!model.isGamePaused());
                                                       }
                                                   }
                                               }
@@ -39,9 +30,17 @@ public class Controller {
         //游戏重启按钮的动作
         view.newGame.addActionListener(new ActionListener() {
                                            public void actionPerformed(ActionEvent e) {
-                                               model.serverVoteYes = true;
+                                               model.setServerVoteYes(true);
                                            }
                                        }
+        );
+
+        //操作帮助按钮的动作
+        view.helper.addActionListener(new ActionListener(){
+                                        public void actionPerformed(ActionEvent e) {
+                                            model.addMessage("帮助: 按 空格 键开火,  按键盘的方向键来控制坦克的移动");
+                                        }
+                                    }
         );
         //操作退出按钮的动作
         view.exit.addActionListener(new ActionListener() {

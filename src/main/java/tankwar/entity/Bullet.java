@@ -50,7 +50,7 @@ public class Bullet implements Actor{
 	}
 
 	public void move(){
-		if(gameModel.gamePaused){
+		if(gameModel.isGamePaused()){
 			return;
 		}
 
@@ -105,7 +105,7 @@ public class Bullet implements Actor{
 							Base temp = (Base)gameModel.actors[i];
 							temp.doom();
 							hitTarget = true;
-							gameModel.gameOver = true;
+							gameModel.setGameOver(true);
 						}
 					}
 				}

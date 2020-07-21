@@ -43,7 +43,7 @@ public class Bomb implements Actor{
 		g.fillOval(xPos-inner, yPos-inner, 2*inner, 2*inner);
 	}
 	public void move(){
-		if(gameModel.gamePaused){
+		if(gameModel.isGamePaused()){
 			return;
 		}
 		animationTime--;

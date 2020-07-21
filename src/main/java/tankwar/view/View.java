@@ -10,7 +10,7 @@ import java.awt.*;
 //这个类表示服务器的图形界面
 public class View extends JFrame{
 	public DrawingPanel mainPanel;
-	public JButton createServer, exit, pauseAndResume, newGame, hiddenButton;
+	public JButton exit, pauseAndResume, newGame, helper;
 
 	public Controller controler;
 	public Model model;
@@ -32,21 +32,21 @@ public class View extends JFrame{
 		getContentPane().add(mainPanel);
 		mainPanel.setFocusable(true);
 
-		//制作选项按钮
-		createServer = new JButton("启动游戏");
-		createServer.setBounds(0, 0,120,22);
-		getContentPane().add(createServer);
-		createServer.setFocusable(false);
-
 		pauseAndResume = new JButton("暂停/继续");
-		pauseAndResume.setBounds(120, 0,120,22);
+		pauseAndResume.setBounds(0, 0,120,22);
 		getContentPane().add(pauseAndResume);
 		pauseAndResume.setFocusable(false);
 
 		newGame = new JButton("重新开始");
-		newGame.setBounds(240, 0,120,22);
+		newGame.setBounds(120, 0,120,22);
 		getContentPane().add(newGame);
 		newGame.setFocusable(false);
+
+		//制作选项按钮
+		helper = new JButton("帮助信息");
+		helper.setBounds(240, 0,120,22);
+		getContentPane().add(helper);
+		helper.setFocusable(false);
 
 		exit = new JButton("退出");
 		exit.setBounds(360, 0,120,22);
