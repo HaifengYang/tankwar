@@ -1,7 +1,7 @@
 package tankwar.enums;
 
 public enum FirePossibility {
-    LOW(0.9D), HIGH(0.85);
+    LOW(0.90D), HIGH(0.85);
     
     private final double value;
 

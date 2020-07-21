@@ -24,7 +24,6 @@ public class Bullet implements Actor{
 
 	public Bullet(int xPos, int yPos, int direction, int speed, int bulletPower, Actor owner, Model gameModel){
 		new AudioPlay(AudioUtil.FIRE).new AudioThread().start();
-
 		this.owner = owner;
 		this.gameModel = gameModel;
 		this.xPos = xPos;
