@@ -2,20 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="127e957f-35a6-45a5-96fb-8eb44f02d18d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/FirePossibility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/enums/FirePossibility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioPlay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/IoUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/map/level1.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/map/level2.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/map/level22.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/map/level3.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/map/level4.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/map/level5.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/map/level6.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/map/level7.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -40,23 +50,40 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mybatisSource/mybatis" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/map" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="tankwar.enums" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/map" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="tankwar.enums" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/map" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.tankwar">
+    <configuration name="IoUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tankwar.utils.IoUtils" />
+      <module name="tankwar" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tankwar.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Level" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="tankwar.entity.Level" />
       <module name="tankwar" />
@@ -86,6 +113,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.tankwar" />
+        <item itemvalue="Application.IoUtils" />
         <item itemvalue="Application.Level" />
       </list>
     </recent_temporary>
@@ -103,6 +131,9 @@
     </task>
     <servers />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.map" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="166" y="0" width="1024" height="768" key="#Project_Structure" timestamp="1595075899229">
       <screen x="0" y="0" width="1366" height="768" />
@@ -112,10 +143,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="141" y="42" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1594211021377" />
-    <state x="333" y="184" width="689" height="406" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595116408411">
+    <state x="333" y="184" width="689" height="406" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595857940464">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="333" y="184" width="689" height="406" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.768@0.0.1366.768" timestamp="1595116408411" />
+    <state x="333" y="184" width="689" height="406" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.768@0.0.1366.768" timestamp="1595857940464" />
     <state x="491" y="71" width="374" height="633" key="#com.intellij.ide.util.MemberChooser" timestamp="1595143309768">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -136,65 +167,77 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="257" y="0" width="855" height="768" key="#tankwar/0.0.1366.768@0.0.1366.768" timestamp="1594211449987" />
+    <state x="417" y="238" width="521" height="298" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1595861442670">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="417" y="238" width="521" height="298" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.768@0.0.1366.768" timestamp="1595861442670" />
+    <state width="426" height="485" key="DebuggerActiveHint" timestamp="1595859195216">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="426" height="485" key="DebuggerActiveHint/0.0.1366.768@0.0.1366.768" timestamp="1595859195216" />
     <state x="100" y="100" width="1166" height="568" key="DiffContextDialog" timestamp="1595341209037">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="100" y="100" width="1166" height="568" key="DiffContextDialog/0.0.1366.768@0.0.1366.768" timestamp="1595341209037" />
-    <state x="449" y="145" width="573" height="521" key="FileChooserDialogImpl" timestamp="1595338350678">
+    <state x="449" y="145" width="573" height="521" key="FileChooserDialogImpl" timestamp="1595508695014">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="449" y="145" width="573" height="521" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1595338350678" />
-    <state width="1322" height="158" key="GridCell.Tab.0.bottom" timestamp="1595342522359">
+    <state x="449" y="145" width="573" height="521" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1595508695014" />
+    <state width="1322" height="205" key="GridCell.Tab.0.bottom" timestamp="1595941462741">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="158" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1595342522359" />
-    <state width="1322" height="158" key="GridCell.Tab.0.center" timestamp="1595342522359">
+    <state width="1322" height="205" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1595941462741" />
+    <state width="1322" height="205" key="GridCell.Tab.0.center" timestamp="1595941462741">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="158" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1595342522359" />
-    <state width="1322" height="158" key="GridCell.Tab.0.left" timestamp="1595342522358">
+    <state width="1322" height="205" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1595941462741" />
+    <state width="1322" height="205" key="GridCell.Tab.0.left" timestamp="1595941462740">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="158" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1595342522358" />
-    <state width="1322" height="158" key="GridCell.Tab.0.right" timestamp="1595342522359">
+    <state width="1322" height="205" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1595941462740" />
+    <state width="1322" height="205" key="GridCell.Tab.0.right" timestamp="1595941462741">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="158" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1595342522359" />
-    <state width="1322" height="66" key="GridCell.Tab.1.bottom" timestamp="1595340710604">
+    <state width="1322" height="205" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1595941462741" />
+    <state width="1322" height="205" key="GridCell.Tab.1.bottom" timestamp="1595941463781">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="66" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1595340710604" />
-    <state width="1322" height="66" key="GridCell.Tab.1.center" timestamp="1595340710604">
+    <state width="1322" height="205" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1595941463781" />
+    <state width="1322" height="205" key="GridCell.Tab.1.center" timestamp="1595941463780">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="66" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1595340710604" />
-    <state width="1322" height="66" key="GridCell.Tab.1.left" timestamp="1595340710604">
+    <state width="1322" height="205" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1595941463780" />
+    <state width="1322" height="205" key="GridCell.Tab.1.left" timestamp="1595941463780">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="66" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1595340710604" />
-    <state width="1322" height="66" key="GridCell.Tab.1.right" timestamp="1595340710604">
+    <state width="1322" height="205" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1595941463780" />
+    <state width="1322" height="205" key="GridCell.Tab.1.right" timestamp="1595941463781">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="66" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1595340710604" />
-    <state x="246" y="102" width="863" height="534" key="IDE.errors.dialog" timestamp="1595338305071">
+    <state width="1322" height="205" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1595941463781" />
+    <state x="246" y="102" width="863" height="534" key="IDE.errors.dialog" timestamp="1595508266537">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="246" y="102" width="863" height="534" key="IDE.errors.dialog/0.0.1366.768@0.0.1366.768" timestamp="1595338305071" />
-    <state x="87" y="0" width="1067" height="737" key="SettingsEditor" timestamp="1595338334878">
+    <state x="246" y="102" width="863" height="534" key="IDE.errors.dialog/0.0.1366.768@0.0.1366.768" timestamp="1595508266537" />
+    <state x="87" y="0" width="1067" height="737" key="SettingsEditor" timestamp="1595858889649">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="87" y="0" width="1067" height="737" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1595338334878" />
+    <state x="87" y="0" width="1067" height="737" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1595858889649" />
     <state x="520" y="298" width="316" height="179" key="VCS.ChangelistChooser" timestamp="1594643601043">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="520" y="298" width="316" height="179" key="VCS.ChangelistChooser/0.0.1366.768@0.0.1366.768" timestamp="1594643601043" />
-    <state x="229" y="106" width="897" height="562" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1595143858716">
+    <state x="229" y="106" width="897" height="562" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1595860022761">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="229" y="106" width="897" height="562" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.768@0.0.1366.768" timestamp="1595143858716" />
-    <state x="352" y="109" width="662" height="608" key="find.popup" timestamp="1595341985375">
+    <state x="229" y="106" width="897" height="562" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.768@0.0.1366.768" timestamp="1595860022761" />
+    <state x="352" y="109" width="662" height="608" key="find.popup" timestamp="1595937736518">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="352" y="109" width="662" height="608" key="find.popup/0.0.1366.768@0.0.1366.768" timestamp="1595341985375" />
+    <state x="352" y="109" width="662" height="608" key="find.popup/0.0.1366.768@0.0.1366.768" timestamp="1595937736518" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1595858861898">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1595858861898" />
   </component>
 </project>
