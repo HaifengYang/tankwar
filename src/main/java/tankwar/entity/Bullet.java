@@ -56,7 +56,7 @@ public class Bullet implements Actor{
 		//检查这子弹是否撞击地图边界
 		if(!border.intersects(map)){
 			gameModel.removeActor(this);
-			notifiyOwner();
+			notifyOwner();
 			makeBomb();
 			return;
 		}
@@ -85,7 +85,7 @@ public class Bullet implements Actor{
 							if(temp.owner.getType()==ActorType.PLAYER){
 								hitTarget = true;
 								gameModel.removeActor(gameModel.actors[i]);
-								temp.notifiyOwner();
+								temp.notifyOwner();
 							}
 						}else if(gameModel.actors[i].getType()==ActorType.PLAYER){
 							if(owner.getType()==ActorType.ENEMY){
@@ -114,7 +114,7 @@ public class Bullet implements Actor{
 		//如果子弹打到其他对象,从游戏系统中删除这个子弹对象
 		if(hitTarget){
 			gameModel.removeActor(this);
-			notifiyOwner();
+			notifyOwner();
 			makeBomb();
 			return;
 		}
@@ -146,7 +146,7 @@ public class Bullet implements Actor{
 		return ActorType.BULLET;
 	}
 
-	public void notifiyOwner(){
+	public void notifyOwner(){
 			if(owner != null){
 				if(owner.getType()==ActorType.PLAYER){
 					Player temp = (Player)owner;

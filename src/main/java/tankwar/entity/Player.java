@@ -158,7 +158,7 @@ public class Player implements Actor {
             if (speed > 0)
                 speed--;
         } else {
-            if (speed < 4)
+            if (speed < 5)
                 speed++;
         }
 
@@ -435,5 +435,33 @@ public class Player implements Actor {
 
     public void setxPos(int xPos) {
         this.xPos = xPos;
+    }
+
+    public void moveUp(){
+        moveUp = true;
+        moveDown = false;
+        moveLeft = false;
+        moveRight = false;
+    }
+
+    public void moveDown(){
+        moveUp = false;
+        moveDown = true;
+        moveLeft = false;
+        moveRight = false;
+    }
+
+    public void moveLeft(){
+        moveUp = false;
+        moveDown = false;
+        moveLeft = true;
+        moveRight = false;
+    }
+
+    public void moveRight(){
+        moveUp = false;
+        moveDown = false;
+        moveLeft = false;
+        moveRight = true;
     }
 }

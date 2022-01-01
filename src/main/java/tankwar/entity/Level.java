@@ -9,10 +9,10 @@ import java.util.Random;
 //因为只有一层对象,所以在这个类是一个静态变量
 public class Level {
 	public static int currentLevel = 0;
-	public static int enemySpawnTime = 150;
+	public static int enemySpawnTime = 100;
 	public static int enemyLeft = 20;
 	public static int deathCount = 0;
-	public static int maxNoEnemy = 2;
+	public static int maxNoEnemy = 3;
 	public static int NoOfEnemy = 0;
 	public static int[] enemySequence;
 
@@ -132,7 +132,7 @@ public class Level {
 	public static void spawnEnemy(Model gameModel){
     	if(NoOfEnemy < maxNoEnemy && enemyLeft > 0 && (Model.gameFlow % enemySpawnTime == 0)){
 			int xPos = 23 + new Random().nextInt(3)*238;
-			boolean flashing = (enemyLeft%3 == 0);
+			boolean flashing = (enemyLeft%5 == 0);
 			gameModel.addActor(new Enemy(enemySequence[20-enemyLeft], flashing, xPos, 23, gameModel));
 			enemyLeft--;
 			NoOfEnemy++;
@@ -149,11 +149,9 @@ public class Level {
 	}
 	public static void goOn(){
 		currentLevel--;
-		enemySpawnTime = 150;
+		enemySpawnTime = 100;
 		enemyLeft = 20;
-		deathCount = 0;
 		maxNoEnemy = 3;
-		NoOfEnemy = 0;
 	}
 
 }
