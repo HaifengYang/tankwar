@@ -56,7 +56,7 @@ public class View extends JFrame{
 		//设置主框架
 		setBounds(150, 130, 640, 590);
     	setVisible(true);
-    	setResizable( false );
+    	setResizable(false);
 
 		//设置服务器模式
 		model = new Model(this);

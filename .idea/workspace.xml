@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="127e957f-35a6-45a5-96fb-8eb44f02d18d" name="Default Changelist" comment="加快玩家坦克速度，加快敌方坦克出现速度">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/config/ThreadPoolFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="127e957f-35a6-45a5-96fb-8eb44f02d18d" name="Default Changelist" comment="使用线程池优化程序性能">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/s.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/model/Ticker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/model/Ticker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioPlay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/utils/IoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/IoUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/view/DrawingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/view/DrawingPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/1.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,13 +52,17 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../study/jprofiler11/bin/jprofiler.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/image" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yang\IdeaProjects\tankwar\src\main\resources\image" />
+      <recent name="$PROJECT_DIR$/src/main/resources/map" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/map" />
       <recent name="$PROJECT_DIR$/src" />
@@ -72,9 +70,6 @@
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="tankwar.enums" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/map" />
     </key>
   </component>
   <component name="RunManager">
@@ -154,26 +149,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tankwar/model/Model.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tankwar/model/Model.java</url>
-          <line>70</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tankwar/model/Model.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tankwar/model/Model.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java</url>
           <line>133</line>

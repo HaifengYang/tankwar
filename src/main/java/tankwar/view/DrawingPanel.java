@@ -32,15 +32,18 @@ public class DrawingPanel extends JPanel{
 		super.paintComponent(g);
 
 		if(gameStarted){
-			//制作背景
-			g.setColor(Color.blue);
-			g.drawRect(10, 10, 501, 501);
 
 			//制作坦克等等
-			if(actors != null)
+			if(actors != null) {
 				for(int i = 0; i < actors.length; i++)
-					if(actors[i] != null)
+					if(actors[i] != null) {
 						actors[i].draw(g);
+					}
+			}
+
+			//制作背景
+			g.setColor(Color.blue);
+			g.drawRect(10, 10, 501, 502);
 
 			//制作级别关卡
 			g.setColor(new Color(81,111, 230));

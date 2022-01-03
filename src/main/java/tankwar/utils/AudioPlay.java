@@ -31,22 +31,10 @@ public class AudioPlay {
             });
 
             clip.start();
-        } catch (UnsupportedAudioFileException | IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
     }
-
-//    public void player() {
-//        try {
-//            InputStream in = new FileInputStream(new File(this.getClass().getClassLoader().getResource(fileName).getFile()));
-//            AudioIStream audio = new AudioStream(in);
-//            AudioPlayer.player.start(audio);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     /**
      * 内部类实现播放音乐线程
