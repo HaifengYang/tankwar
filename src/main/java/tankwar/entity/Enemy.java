@@ -1,5 +1,6 @@
 package tankwar.entity;
 
+import tankwar.config.ThreadPoolFactory;
 import tankwar.enums.*;
 import tankwar.model.Model;
 import tankwar.utils.AudioPlay;
@@ -26,7 +27,7 @@ public class Enemy implements Actor {
     public int direction;
     public int interval;
     public int health;
-    ;
+
     public int xPos, yPos, xVPos, yVPos;
     public Rectangle border;
     public boolean flashing;
@@ -268,7 +269,7 @@ public class Enemy implements Actor {
             if (health == 0) {
                 death = true;
             } else {
-                new AudioPlay(AudioUtil.HIT).new AudioThread().start();
+                ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.HIT).new AudioThread());
                 if (health == 3) {
                     for (int i = 0; i < 4; i++)
                         textures[i] = textures[4 + i];
@@ -284,8 +285,8 @@ public class Enemy implements Actor {
         }
 
         if (death) {
-            new AudioPlay(AudioUtil.BLAST).new AudioThread().start();
-            Level.NoOfEnemy--;
+            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.BLAST).new AudioThread());
+            Level.noOfEnemy--;
             Level.deathCount++;
             gameModel.removeActor(this);
             gameModel.addActor(new Bomb(xPos, yPos, BombType.BIG, gameModel));

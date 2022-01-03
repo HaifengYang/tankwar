@@ -1,7 +1,7 @@
 package tankwar.view;
 
-import tankwar.model.Model;
 import tankwar.controller.Controller;
+import tankwar.model.Model;
 
 import javax.swing.*;
 import java.awt.*;

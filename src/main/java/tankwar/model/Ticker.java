@@ -1,5 +1,7 @@
 package tankwar.model;
 
+import tankwar.config.ThreadPoolFactory;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,9 +11,8 @@ import java.awt.event.ActionListener;
 public class Ticker implements Runnable {
     private ActionListener actionListener;
 
-    public Ticker(int i) {
-        Thread t = new Thread(this);
-        t.start();
+    public Ticker() {
+        ThreadPoolFactory.getExecutor().submit(this);
     }
 
     public void addActionListener(ActionListener actionlistener) {
@@ -22,6 +23,7 @@ public class Ticker implements Runnable {
         }
     }
 
+    @Override
     public void run() {
         ActionEvent actionevent = new ActionEvent(this, 0, null);
         actionListener.actionPerformed(actionevent);

@@ -1,5 +1,6 @@
 package tankwar.model;
 
+import tankwar.config.ThreadPoolFactory;
 import tankwar.entity.Actor;
 import tankwar.entity.Enemy;
 import tankwar.entity.Level;
@@ -23,7 +24,7 @@ public class Model implements ActionListener {
     private boolean gamePaused;
     private boolean gameOver;
     private volatile boolean serverVoteYes;
-    private Ticker t;
+    private final Ticker t;
     /**
      * 播放gameOver的标识
      */
@@ -42,7 +43,7 @@ public class Model implements ActionListener {
         messageQueue = new String[8];
         serverVoteYes = false;
         view.mainPanel.messageQueue = messageQueue;
-        t = new Ticker(1000);
+        t = new Ticker();
         t.addActionListener(this);
     }
 
@@ -62,7 +63,7 @@ public class Model implements ActionListener {
         view.mainPanel.actors = actors;
         view.mainPanel.gameStarted = true;
 
-        new AudioPlay(AudioUtil.START).new AudioThread().start();// 播放背景音效
+        ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.START).new AudioThread());// 播放背景音效
 
     }
 
@@ -144,7 +145,7 @@ public class Model implements ActionListener {
             player.setFreezed(1);
 
             if (!isBroadcastGameOver) {
-                new AudioPlay(AudioUtil.GAMEOVER).new AudioThread().start();//新建一个音效线程，用于播放音效
+                ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.GAMEOVER).new AudioThread());//新建一个音效线程，用于播放音效
                 isBroadcastGameOver = true;
             }
         }
@@ -164,9 +165,10 @@ public class Model implements ActionListener {
             Enemy.freezedMoment = 0;
             Enemy.freezedTime = 0;
             gameFlow = 0;
+            gamePaused = false;
             serverVoteYes = false;
 
-            new AudioPlay(AudioUtil.START).new AudioThread().start();// 播放背景音效
+            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.START).new AudioThread());// 播放背景音效
         }
     }
 

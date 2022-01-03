@@ -5,11 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="127e957f-35a6-45a5-96fb-8eb44f02d18d" name="Default Changelist" comment="加快玩家坦克速度，加快敌方坦克出现速度">
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/config/ThreadPoolFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/PowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/PowerUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/map/level1.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/map/level1.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/map/level2.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/map/level2.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/map/level8.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/map/level8.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/model/Ticker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/model/Ticker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioPlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/utils/IoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/IoUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/view/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +116,21 @@
       <option name="project" value="LOCAL" />
       <updated>1641010464337</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="加快玩家坦克速度，加快敌方坦克出现速度">
+      <created>1641048840569</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1641048840569</updated>
+    </task>
+    <task id="LOCAL-00003" summary="加快玩家坦克速度，加快敌方坦克出现速度">
+      <created>1641048871758</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1641048871758</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -129,5 +150,41 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="加快玩家坦克速度，加快敌方坦克出现速度" />
     <option name="LAST_COMMIT_MESSAGE" value="加快玩家坦克速度，加快敌方坦克出现速度" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tankwar/model/Model.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tankwar/model/Model.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tankwar/model/Model.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tankwar/model/Model.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java</url>
+          <line>133</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java</url>
+          <line>134</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

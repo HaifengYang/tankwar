@@ -13,7 +13,7 @@ public class Level {
 	public static int enemyLeft = 20;
 	public static int deathCount = 0;
 	public static int maxNoEnemy = 3;
-	public static int NoOfEnemy = 0;
+	public static int noOfEnemy = 0;
 	public static int[] enemySequence;
 
 	//制作获胜场景所需的变量
@@ -83,6 +83,7 @@ public class Level {
 		if(1+ (currentLevel-1)%8 == 7){
 			enemySequence = new int[]{3,3,3,3,3,3,3,3,3,3,2,4,2,4,2,4,2,4,2,4};
 			String[] level = IoUtils.readMap(7);
+			loadLevel(gameModel, level);
 		}
 
 		if(1+ (currentLevel-1)%8 == 8){
@@ -130,12 +131,12 @@ public class Level {
 	}
 
 	public static void spawnEnemy(Model gameModel){
-    	if(NoOfEnemy < maxNoEnemy && enemyLeft > 0 && (Model.gameFlow % enemySpawnTime == 0)){
+    	if(noOfEnemy < maxNoEnemy && enemyLeft > 0 && (Model.gameFlow % enemySpawnTime == 0)){
 			int xPos = 23 + new Random().nextInt(3)*238;
 			boolean flashing = (enemyLeft%5 == 0);
 			gameModel.addActor(new Enemy(enemySequence[20-enemyLeft], flashing, xPos, 23, gameModel));
 			enemyLeft--;
-			NoOfEnemy++;
+			noOfEnemy++;
 		}
 	}
 
@@ -145,13 +146,14 @@ public class Level {
 		enemyLeft = 20;
 		deathCount = 0;
 		maxNoEnemy = 3;
-		NoOfEnemy = 0;
+		noOfEnemy = 0;
 	}
 	public static void goOn(){
 		currentLevel--;
 		enemySpawnTime = 100;
 		enemyLeft = 20;
 		maxNoEnemy = 3;
+		noOfEnemy = 0;
 	}
 
 }

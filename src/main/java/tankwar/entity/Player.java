@@ -1,5 +1,6 @@
 package tankwar.entity;
 
+import tankwar.config.ThreadPoolFactory;
 import tankwar.enums.*;
 import tankwar.model.Model;
 import tankwar.utils.AudioPlay;
@@ -180,7 +181,7 @@ public class Player implements Actor {
             if (gameModel.actors[i] != null) {
                 if (this != gameModel.actors[i]) {
                     if (border.intersects(gameModel.actors[i].getBorder())) {
-                        if (gameModel.actors[i].getType()==ActorType.POWER_UP) {
+                        if (gameModel.actors[i].getType() == ActorType.POWER_UP) {
                             scores += 50;
                             PowerUp temp = (PowerUp) gameModel.actors[i];
                             int function = temp.getFunction();
@@ -192,12 +193,12 @@ public class Player implements Actor {
                             } else if (function == 2) {   // 杀死所有的敌方坦克
                                 for (int j = 0; j < gameModel.actors.length; j++)
                                     if (gameModel.actors[j] != null)
-                                        if (gameModel.actors[j].getType()==ActorType.ENEMY) {
+                                        if (gameModel.actors[j].getType() == ActorType.ENEMY) {
                                             Enemy tempe = (Enemy) gameModel.actors[j];
                                             gameModel.addActor(new Bomb(tempe.xPos, tempe.yPos, BombType.BIG, gameModel));
                                             gameModel.removeActor(gameModel.actors[j]);
                                         }
-                                Level.NoOfEnemy = 0;
+                                Level.noOfEnemy = 0;
                                 Level.deathCount = 20 - Level.enemyLeft;
                             } else if (function == 3) {   //防护盾，刀枪不入
                                 invulnerableTime = 300 + new Random().nextInt(400);
@@ -218,10 +219,10 @@ public class Player implements Actor {
 
                             gameModel.removeActor(gameModel.actors[i]);
 
-                            new AudioPlay(AudioUtil.ADD).new AudioThread().start();// 播放背景音效
+                            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.ADD).new AudioThread());
                         }
                         //静态对象，如墙壁，河流
-                        else if (gameModel.actors[i].getType()==ActorType.STEEL_WALL || gameModel.actors[i].getType()==ActorType.WALL) {
+                        else if (gameModel.actors[i].getType() == ActorType.STEEL_WALL || gameModel.actors[i].getType() == ActorType.WALL) {
                             if (!gameModel.actors[i].wallDestroyed()) {
                                 for (int j = 0; j < gameModel.actors[i].getDetailedBorder().length; j++) {
                                     if (gameModel.actors[i].getDetailedBorder()[j] != null) {
@@ -235,7 +236,7 @@ public class Player implements Actor {
                                     }
                                 }
                             }
-                        } else if (gameModel.actors[i].getType()==ActorType.RIVER || gameModel.actors[i].getType()==ActorType.BASE) {
+                        } else if (gameModel.actors[i].getType() == ActorType.RIVER || gameModel.actors[i].getType() == ActorType.BASE) {
                             xPos = xVPos;
                             yPos = yVPos;
                             border.x = xPos - size;
@@ -244,8 +245,8 @@ public class Player implements Actor {
                             return;
                         }
                         //移动对象，例如敌人坦克
-                        else if (gameModel.actors[i].getType()==ActorType.ENEMY || gameModel.actors[i].getType()==ActorType.PLAYER) {
-                            if (!borderTemp.intersects(gameModel.actors[i].getBorder()) || gameModel.actors[i].getType()==ActorType.ENEMY) {
+                        else if (gameModel.actors[i].getType() == ActorType.ENEMY || gameModel.actors[i].getType() == ActorType.PLAYER) {
+                            if (!borderTemp.intersects(gameModel.actors[i].getBorder()) || gameModel.actors[i].getType() == ActorType.ENEMY) {
                                 xPos = xPosTemp;
                                 yPos = yPosTemp;
                                 border.x = xPos - size;
@@ -296,7 +297,7 @@ public class Player implements Actor {
         g.drawString(life + "", 565, 396);
         String SCORE = "000000000" + scores;
         g.drawString(" 得分:" + "", 515, 370);
-        g.drawString(SCORE.substring(SCORE.length() - 7, SCORE.length()) + "", 566, 370);
+        g.drawString(SCORE.substring(SCORE.length() - 7) + "", 566, 370);
     }
 
     public Rectangle getBorder() {
@@ -314,7 +315,7 @@ public class Player implements Actor {
         //如果坦克只有1级的健康状态，被击中，那么玩家坦克失去一个生命，如果玩家坦克是最后一次生命，被击中，则game over
         //只有吃掉超级星星时，玩家才会有2级的生命健康状态
         if (health == 1) {
-            new AudioPlay(AudioUtil.BLAST).new AudioThread().start();//新建一个音效线程，用于播放音效
+            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.BLAST).new AudioThread());//新建一个音效线程，用于播放音效
 
             gameModel.addActor(new Bomb(xPos, yPos, BombType.BIG, gameModel));
             life--;
@@ -340,7 +341,7 @@ public class Player implements Actor {
                     textures[i] = gameModel.textures[76 + i];
             }
         } else {
-            new AudioPlay(AudioUtil.HIT).new AudioThread().start();
+            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.HIT).new AudioThread());
             health--;
             status = 3;
             for (int i = 0; i < 4; i++)
@@ -387,8 +388,7 @@ public class Player implements Actor {
         return false;
     }
 
-    public void numberOfBulletIncrease()
-    {
+    public void numberOfBulletIncrease() {
         numberOfBullet++;
     }
 
@@ -437,28 +437,28 @@ public class Player implements Actor {
         this.xPos = xPos;
     }
 
-    public void moveUp(){
+    public void moveUp() {
         moveUp = true;
         moveDown = false;
         moveLeft = false;
         moveRight = false;
     }
 
-    public void moveDown(){
+    public void moveDown() {
         moveUp = false;
         moveDown = true;
         moveLeft = false;
         moveRight = false;
     }
 
-    public void moveLeft(){
+    public void moveLeft() {
         moveUp = false;
         moveDown = false;
         moveLeft = true;
         moveRight = false;
     }
 
-    public void moveRight(){
+    public void moveRight() {
         moveUp = false;
         moveDown = false;
         moveLeft = false;
