@@ -1,7 +1,7 @@
 package tankwar.entity;
 
 import tankwar.model.Model;
-import tankwar.enums.ActorType;
+import tankwar.constant.ActorType;
 
 import java.awt.*;
 import java.util.Random;
@@ -22,8 +22,7 @@ public class PowerUp implements Actor{
 		this.gameModel = gameModel;
 		//加载图像
 		textures = new Image[7];
-		for(int i = 0; i < 7; i ++)
-			textures[i] = gameModel.textures[46+i];
+		System.arraycopy(gameModel.textures, 46, textures, 0, 7);
 
 		xPos = 24 + new Random().nextInt(475);
 		yPos = 24 + new Random().nextInt(475);

@@ -1,10 +1,10 @@
 package tankwar.entity;
 
 import tankwar.config.ThreadPoolFactory;
-import tankwar.enums.*;
+import tankwar.constant.*;
 import tankwar.model.Model;
 import tankwar.utils.AudioPlay;
-import tankwar.utils.AudioUtil;
+import tankwar.utils.MusicUtil;
 
 import java.awt.*;
 import java.util.Random;
@@ -18,18 +18,16 @@ public class Player implements Actor {
     private int scores;
     private int life;
     private int speed;
-    private int direction;
     private int invulnerableTime;
-    private int freezed;
-    private boolean moveUp;
-    private boolean moveDown;
-    private boolean moveLeft;
-    private boolean moveRight;
+    private Direction direction;
+    // 长度为4的数组，分别代表moveUp，moveDown, moveLeft, moveRight
+    private boolean[] movingDirection;
     private boolean fire;
     private int numberOfBullet;
     private int coolDownTime;
     private int status;
     private int health;
+    private int frozen;
     private int xPos, yPos, xVPos, yVPos;
     private Rectangle border;
     private final Image standardImage;
@@ -38,20 +36,20 @@ public class Player implements Actor {
 
     public Player(Model gameModel) {
         life = 3;
-        direction = Direction.UP.value();
         status = 1;
         health = 1;
         numberOfBullet = 1;
         invulnerableTime = 150;
+        this.movingDirection = new boolean[4];
+        this.direction = Direction.UP;
         this.gameModel = gameModel;
 
         textures = new Image[4];
-        //玩家1游戏开启时位置
+        //玩家游戏开启时位置
         xPos = 198;
         yPos = 498;
-        //玩家1的图像
-        for (int i = 0; i < 4; i++)
-            textures[i] = gameModel.textures[18 + i];
+        //玩家的图像
+        System.arraycopy(gameModel.textures, 18, textures, 0, 4);
         standardImage = textures[0];
 
         xVPos = xPos;
@@ -71,22 +69,19 @@ public class Player implements Actor {
         if (invulnerableTime > 0) {
             invulnerableTime--;
         }
-        if (freezed == 1) {
-            return;
-        }
         //如果玩家点击“开火”键，并且满足条件，则创建一个子弹目标（即发射子弹）
         if (fire && coolDownTime == 0 && numberOfBullet > 0) {
             //子弹方向
-            int c = direction;
+            int c = direction.value();
             //子弹位置
             int a, b;
-            if (direction == Direction.UP.value()) {
+            if (direction.value() == Direction.UP.value()) {
                 a = xPos;
                 b = yPos - size;
-            } else if (direction == Direction.DOWN.value()) {
+            } else if (direction.value() == Direction.DOWN.value()) {
                 a = xPos;
                 b = yPos + size;
-            } else if (direction == Direction.LEFT.value()) {
+            } else if (direction.value() == Direction.LEFT.value()) {
                 a = xPos - size;
                 b = yPos;
             } else {
@@ -121,7 +116,6 @@ public class Player implements Actor {
             numberOfBullet--;
         }
 
-
         //保存当前位置信息，如果新的移动确定后无效，则更改
         //以前的位置
         int xPosTemp = xPos;
@@ -130,36 +124,36 @@ public class Player implements Actor {
 
         //根据玩家坦克的移动定义玩家坦克的下一个边界，假设它的下一个移动是有效的；
         boolean notMoving = false;
-        if (moveUp) {
-            if (direction != Direction.UP.value() && direction != Direction.DOWN.value())
+        if (movingDirection[0]) {
+            if (direction.value() != Direction.UP.value() || direction.value() != Direction.DOWN.value())
                 xPos = xVPos;
             yPos -= speed;
-            direction = Direction.UP.value();
-        } else if (moveDown) {
-            if (direction != Direction.UP.value() && direction != Direction.DOWN.value()) {
+            direction = Direction.UP;
+        } else if (movingDirection[1]) {
+            if (direction.value() != Direction.UP.value() || direction.value() != Direction.DOWN.value())
                 xPos = xVPos;
-            }
             yPos += speed;
-            direction = Direction.DOWN.value();
-        } else if (moveLeft) {
-            if (direction != Direction.LEFT.value() && direction != Direction.RIGHT.value()) {
+            direction = Direction.DOWN;
+        } else if (movingDirection[2]) {
+            if (direction.value() != Direction.LEFT.value() && direction.value() != Direction.RIGHT.value())
                 yPos = yVPos;
-            }
             xPos -= speed;
-            direction = Direction.LEFT.value();
-        } else if (moveRight) {
-            if (direction != Direction.LEFT.value() && direction != Direction.RIGHT.value())
+            direction = Direction.LEFT;
+        } else if (movingDirection[3]) {
+            if (direction.value() != Direction.LEFT.value() && direction.value() != Direction.RIGHT.value())
                 yPos = yVPos;
             xPos += speed;
-            direction = Direction.RIGHT.value();
+            direction = Direction.RIGHT;
         } else {
             notMoving = true;
         }
+
+
         if (notMoving) {
             if (speed > 0)
                 speed--;
         } else {
-            if (speed < 5)
+            if (speed < 4)
                 speed++;
         }
 
@@ -177,7 +171,9 @@ public class Player implements Actor {
         }
 
         //检查下个边界是否与其他对象相交，如玩家控制的坦克，墙等等
-        for (int i = 0; i < gameModel.actors.length; i++) {
+        for (
+                int i = 0;
+                i < gameModel.actors.length; i++) {
             if (gameModel.actors[i] != null) {
                 if (this != gameModel.actors[i]) {
                     if (border.intersects(gameModel.actors[i].getBorder())) {
@@ -201,17 +197,16 @@ public class Player implements Actor {
                                 Level.noOfEnemy = 0;
                                 Level.deathCount = 20 - Level.enemyLeft;
                             } else if (function == 3) {   //防护盾，刀枪不入
-                                invulnerableTime = 300 + new Random().nextInt(400);
+                                invulnerableTime = 300 + new Random().nextInt(200);
                             } else if (function == 4) {  //冻结所有敌人
-                                Enemy.freezedTime = 300 + new Random().nextInt(400);
+                                Enemy.freezedTime = 300 + new Random().nextInt(200);
                                 Enemy.freezedMoment = Model.gameFlow;
-                            } else if (function == 5) { //超级星星
+                            } else if (function == 5) { //枪
                                 if (status < 3)
                                     numberOfBullet++;
                                 status = 4;
                                 health = 2;
-                                for (int j = 0; j < 4; j++)
-                                    textures[j] = gameModel.textures[84 + j];
+                                System.arraycopy(gameModel.textures, 84, textures, 0, 4);
 
                             } else if (function == 6) {  // 增加生命
                                 life++;
@@ -219,7 +214,7 @@ public class Player implements Actor {
 
                             gameModel.removeActor(gameModel.actors[i]);
 
-                            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.ADD).new AudioThread());
+                            MusicUtil.playAddMusic();
                         }
                         //静态对象，如墙壁，河流
                         else if (gameModel.actors[i].getType() == ActorType.STEEL_WALL || gameModel.actors[i].getType() == ActorType.WALL) {
@@ -283,7 +278,7 @@ public class Player implements Actor {
 
     public void draw(Graphics g) {
         //绘制玩家坦克
-        g.drawImage(textures[direction], xPos - size, yPos - size, null);
+        g.drawImage(textures[direction.value()], xPos - size, yPos - size, null);
         if (invulnerableTime > 0) {
             g.setColor(Color.red);
             g.drawRect(xPos - 12, yPos - 12, 25, 25);
@@ -313,9 +308,8 @@ public class Player implements Actor {
             return;
 
         //如果坦克只有1级的健康状态，被击中，那么玩家坦克失去一个生命，如果玩家坦克是最后一次生命，被击中，则game over
-        //只有吃掉超级星星时，玩家才会有2级的生命健康状态
         if (health == 1) {
-            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.BLAST).new AudioThread());//新建一个音效线程，用于播放音效
+            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioFiles.BLAST).new AudioThread());//新建一个音效线程，用于播放音效
 
             gameModel.addActor(new Bomb(xPos, yPos, BombType.BIG, gameModel));
             life--;
@@ -325,8 +319,9 @@ public class Player implements Actor {
                 border = new Rectangle(xPos - size, yPos - size, 25, 25);
                 xVPos = xPos;
                 yVPos = yPos;
+                MusicUtil.playGameOverMusic();//新建一个音效线程，用于播放音效
             } else {
-                direction = Direction.UP.value();
+                direction = Direction.UP;
                 status = 1;
                 health = 1;
                 numberOfBullet = 1;
@@ -337,15 +332,13 @@ public class Player implements Actor {
                 border = new Rectangle(xPos - size, yPos - size, 25, 25);
                 xVPos = xPos;
                 yVPos = yPos;
-                for (int i = 0; i < 4; i++)
-                    textures[i] = gameModel.textures[76 + i];
+                System.arraycopy(gameModel.textures, 76, textures, 0, 4);
             }
         } else {
-            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.HIT).new AudioThread());
+            MusicUtil.playHitMusic();
             health--;
             status = 3;
-            for (int i = 0; i < 4; i++)
-                textures[i] = gameModel.textures[80 + i];
+            System.arraycopy(gameModel.textures, 80, textures, 0, 4);
         }
     }
 
@@ -353,22 +346,20 @@ public class Player implements Actor {
         //当玩家坦克吃掉正常的星星时，他的子弹将会升级
         if (status == 1) {
             status = 2;
-            for (int i = 0; i < 4; i++)
-                textures[i] = gameModel.textures[76 + i];
+            System.arraycopy(gameModel.textures, 76, textures, 0, 4);
         } else if (status == 2) {
             status = 3;
             numberOfBullet++;
-            for (int i = 0; i < 4; i++)
-                textures[i] = gameModel.textures[80 + i];
+            System.arraycopy(gameModel.textures, 80, textures, 0, 4);
         } else if (status == 3) {
             status = 4;
-            for (int i = 0; i < 4; i++)
-                textures[i] = gameModel.textures[84 + i];
+            health = 2;
+            System.arraycopy(gameModel.textures, 84, textures, 0, 4);
         }
     }
 
     public void reset() {
-        direction = Direction.UP.value();
+        direction = Direction.UP;
         invulnerableTime = 150;
         xPos = 198;
         yPos = 498;
@@ -404,27 +395,6 @@ public class Player implements Actor {
         return life;
     }
 
-    public void setFreezed(int freezed) {
-        this.freezed = freezed;
-    }
-
-    public void setMoveUp(boolean moveUp) {
-        this.moveUp = moveUp;
-    }
-
-
-    public void setMoveDown(boolean moveDown) {
-        this.moveDown = moveDown;
-    }
-
-    public void setMoveLeft(boolean moveLeft) {
-        this.moveLeft = moveLeft;
-    }
-
-    public void setMoveRight(boolean moveRight) {
-        this.moveRight = moveRight;
-    }
-
     public void setFire(boolean fire) {
         this.fire = fire;
     }
@@ -437,31 +407,52 @@ public class Player implements Actor {
         this.xPos = xPos;
     }
 
-    public void moveUp() {
-        moveUp = true;
-        moveDown = false;
-        moveLeft = false;
-        moveRight = false;
+    public int getFrozen() {
+        return frozen;
     }
 
-    public void moveDown() {
-        moveUp = false;
-        moveDown = true;
-        moveLeft = false;
-        moveRight = false;
+    public void setFrozen(int frozen) {
+        this.frozen = frozen;
     }
 
-    public void moveLeft() {
-        moveUp = false;
-        moveDown = false;
-        moveLeft = true;
-        moveRight = false;
+    public void setMovingDirection(boolean[] movingDirection) {
+        this.movingDirection = movingDirection;
     }
 
-    public void moveRight() {
-        moveUp = false;
-        moveDown = false;
-        moveLeft = false;
-        moveRight = true;
+    public void moveDirection(Direction moveDirection) {
+        switch (moveDirection){
+            case UP:
+                movingDirection[0] = true;
+                break;
+            case DOWN:
+                movingDirection[1] = true;
+                break;
+            case LEFT:
+                movingDirection[2] = true;
+                break;
+            case RIGHT:
+                movingDirection[3] = true;
+                break;
+            default:
+        }
+    }
+
+
+    public void stopMoveDirection(Direction moveDirection) {
+        switch (moveDirection){
+            case UP:
+                movingDirection[0] = false;
+                break;
+            case DOWN:
+                movingDirection[1] = false;
+                break;
+            case LEFT:
+                movingDirection[2] = false;
+                break;
+            case RIGHT:
+                movingDirection[3] = false;
+                break;
+            default:
+        }
     }
 }

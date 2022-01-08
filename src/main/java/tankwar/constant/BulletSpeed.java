@@ -1,9 +1,9 @@
-package tankwar.enums;
+package tankwar.constant;
 
 public enum BulletSpeed {
     NORMAL(7), ENHANCED(12);
 
-    private int type;
+    private final int type;
 
     BulletSpeed(int type)
     {

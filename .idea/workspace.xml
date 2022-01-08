@@ -4,13 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="127e957f-35a6-45a5-96fb-8eb44f02d18d" name="Default Changelist" comment="使用线程池优化程序性能">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image/s.jpg" afterDir="false" />
+    <list default="true" id="127e957f-35a6-45a5-96fb-8eb44f02d18d" name="Default Changelist" comment="代码规范化修改">
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/ActorType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/AudioFiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/BombType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/BulletPower.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/BulletSpeed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/Direction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/FirePossibility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/MusicUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioPlay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/view/DrawingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/view/DrawingPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/view/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Actor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Base.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Base.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Grass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Grass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/PowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/PowerUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/River.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/River.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/SteelWall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/SteelWall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Wall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/ActorType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/BombType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/BulletPower.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/BulletSpeed.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/Direction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/FirePossibility.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/Orientation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioUtil.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,13 +48,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../../../study/Java/jdk-17/lib/src.zip!/java.desktop/java/awt/Component.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -56,7 +84,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -125,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641048871758</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="更换老家图像">
+      <created>1641218270849</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1641218270849</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -144,22 +179,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="加快玩家坦克速度，加快敌方坦克出现速度" />
-    <option name="LAST_COMMIT_MESSAGE" value="加快玩家坦克速度，加快敌方坦克出现速度" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java</url>
-          <line>133</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="更换老家图像" />
+    <MESSAGE value="代码规范化修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="代码规范化修改" />
   </component>
 </project>

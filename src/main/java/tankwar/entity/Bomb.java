@@ -1,8 +1,8 @@
 package tankwar.entity;
 
-import tankwar.enums.BombType;
+import tankwar.constant.BombType;
 import tankwar.model.Model;
-import tankwar.enums.ActorType;
+import tankwar.constant.ActorType;
 
 import java.awt.*;
 

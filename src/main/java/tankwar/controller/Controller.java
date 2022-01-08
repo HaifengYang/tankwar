@@ -1,5 +1,6 @@
 package tankwar.controller;
 
+import tankwar.constant.Direction;
 import tankwar.model.Model;
 import tankwar.view.View;
 
@@ -18,13 +19,13 @@ public class Controller {
 
         //操作暂停/继续按钮的动作
         view.pauseAndResume.addActionListener(e -> {
-            if (!model.isGameOver() && model.isGameStarted()) {
-                model.setGamePaused(!model.isGamePaused());
-            }
-        }
+                    if (!model.isGameOver() && model.isGameStarted()) {
+                        model.setGamePaused(!model.isGamePaused());
+                    }
+                }
         );
         //游戏重启按钮的动作
-        view.newGame.addActionListener(e -> model.setServerVoteYes(true)
+        view.newGame.addActionListener(e -> model.setWhetherContinue(true)
         );
 
         //操作帮助按钮的动作
@@ -38,40 +39,42 @@ public class Controller {
         panel.addKeyListener(new KeyAdapter() {
                                  public void keyPressed(KeyEvent e) {
                                      if (model.player != null) {
-                                         switch (e.getKeyCode()){
+                                         switch (e.getKeyCode()) {
                                              case (KeyEvent.VK_UP):
-                                                 model.player.moveUp();
+                                                 model.playerMoveTowards(Direction.UP);
                                                  break;
                                              case (KeyEvent.VK_DOWN):
-                                                 model.player.moveDown();
+                                                 model.playerMoveTowards(Direction.DOWN);
                                                  break;
                                              case (KeyEvent.VK_LEFT):
-                                                 model.player.moveLeft();
+                                                 model.playerMoveTowards(Direction.LEFT);
                                                  break;
                                              case (KeyEvent.VK_RIGHT):
-                                                 model.player.moveRight();
+                                                 model.playerMoveTowards(Direction.RIGHT);
                                                  break;
                                              default:
                                          }
 
                                          if (e.getKeyCode() == KeyEvent.VK_SPACE)
-                                             model.player.setFire(true);
+                                             model.playerFire(true);
 
                                      }
                                  }
 
                                  public void keyReleased(KeyEvent e) {
                                      if (model.player != null) {
-                                         if (e.getKeyCode() == KeyEvent.VK_UP)
-                                             model.player.setMoveUp(false);
-                                         if (e.getKeyCode() == KeyEvent.VK_DOWN)
-                                             model.player.setMoveDown(false);
-                                         if (e.getKeyCode() == KeyEvent.VK_LEFT)
-                                             model.player.setMoveLeft(false);
-                                         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-                                             model.player.setMoveRight(false);
+                                         if (e.getKeyCode() == KeyEvent.VK_UP) {
+                                             model.playerStopMoveTowards(Direction.UP);
+                                         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                                             model.playerStopMoveTowards(Direction.DOWN);
+                                         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                                             model.playerStopMoveTowards(Direction.LEFT);
+                                         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                                             model.playerStopMoveTowards(Direction.RIGHT);
+                                         }
+
                                          if (e.getKeyCode() == KeyEvent.VK_SPACE)
-                                             model.player.setFire(false);
+                                             model.playerFire(false);
                                      }
                                  }
                              }

@@ -1,34 +1,29 @@
 package tankwar.model;
 
-import tankwar.config.ThreadPoolFactory;
-import tankwar.entity.Actor;
-import tankwar.entity.Enemy;
-import tankwar.entity.Level;
-import tankwar.entity.Player;
-import tankwar.utils.AudioPlay;
-import tankwar.utils.AudioUtil;
+import tankwar.constant.Direction;
+import tankwar.entity.*;
+import tankwar.utils.MusicUtil;
 import tankwar.view.View;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 模型类
  */
 public class Model implements ActionListener {
-    public View view;
+    private final View view;
 
     private boolean gameStarted;
-    private boolean serverCreated;
     private boolean gamePaused;
     private boolean gameOver;
-    private volatile boolean serverVoteYes;
-    private final Ticker t;
-    /**
-     * 播放gameOver的标识
-     */
-    private boolean isBroadcastGameOver = false;
+
+    private volatile boolean whetherContinue;
+
     public Image[] textures;
 
     public static int gameFlow;
@@ -41,9 +36,9 @@ public class Model implements ActionListener {
     public Model(View view) {
         this.view = view;
         messageQueue = new String[8];
-        serverVoteYes = false;
+        whetherContinue = false;
         view.mainPanel.messageQueue = messageQueue;
-        t = new Ticker();
+        Ticker t = new Ticker();
         t.addActionListener(this);
     }
 
@@ -58,19 +53,20 @@ public class Model implements ActionListener {
         player = new Player(this);
         addActor(player);
 
-        serverCreated = true;
         gameStarted = true;
         view.mainPanel.actors = actors;
         view.mainPanel.gameStarted = true;
 
-        ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.START).new AudioThread());// 播放背景音效
+        MusicUtil.playStartMusic();// 播放背景音效
 
     }
 
     public void actionPerformed(ActionEvent e) {
         createServer();
-        try {
-            while (true) {
+
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(() -> {
+            try {
                 if (!gamePaused) gameFlow++;
                 gameOver();
                 restart();
@@ -84,34 +80,28 @@ public class Model implements ActionListener {
                 view.mainPanel.repaint();
 
                 if (!view.mainPanel.hasFocus()) {
-                    player.setMoveLeft(false);
-                    player.setMoveUp(false);
-                    player.setMoveDown(false);
-                    player.setMoveRight(false);
+                    player.setMovingDirection(new boolean[4]);
                     player.setFire(false);
                 }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                gameStarted = false;
+                gameOver = false;
+                gameFlow = 0;
+                Enemy.freezedTime = 0;
+                Enemy.freezedMoment = 0;
+                view.mainPanel.gameStarted = false;
 
-                Thread.sleep(30);
+                player = null;
+                Level.reset();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            serverCreated = false;
-            gameStarted = false;
-            gameOver = false;
-            gameFlow = 0;
-            Enemy.freezedTime = 0;
-            Enemy.freezedMoment = 0;
-            view.mainPanel.gameStarted = false;
-
-            player = null;
-            Level.reset();
-        }
+        }, 0, 30, TimeUnit.MILLISECONDS);
     }
 
     private void acotorsMove() {
-        for (int i = 0; i < actors.length; i++) {
-            if (actors[i] != null)
-                actors[i].move();
+        for (Actor actor : actors) {
+            if (actor != null)
+                actor.move();
         }
     }
 
@@ -124,7 +114,7 @@ public class Model implements ActionListener {
         if (Level.deathCount == 20 && !gameOver) {
             Level.winningCount++;
             if (Level.winningCount == 120) {
-                player.setFreezed(1);
+                player.setFrozen(1);
             }
             if (Level.winningCount == 470) {
                 if (player.getLife() > 0)
@@ -132,7 +122,7 @@ public class Model implements ActionListener {
                 Level.loadLevel(this);
             }
             if (Level.winningCount == 500) {
-                player.setFreezed(0);
+                player.setFrozen(0);
                 Level.deathCount = 0;
                 Level.winningCount = 0;
             }
@@ -142,17 +132,12 @@ public class Model implements ActionListener {
     private void gameOver() {
         if (gameOver || player.getLife() == 0) {
             gameOver = true;
-            player.setFreezed(1);
-
-            if (!isBroadcastGameOver) {
-                ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.GAMEOVER).new AudioThread());//新建一个音效线程，用于播放音效
-                isBroadcastGameOver = true;
-            }
+            player.setFrozen(1);
         }
     }
 
     public void restart() {
-        if (serverVoteYes) {
+        if (whetherContinue) {
             player = new Player(this);
             if (player.getLife() == 0) {
                 Level.reset();
@@ -161,14 +146,11 @@ public class Model implements ActionListener {
             }
             Level.loadLevel(this);
             gameOver = false;
-            isBroadcastGameOver = false;
             Enemy.freezedMoment = 0;
             Enemy.freezedTime = 0;
             gameFlow = 0;
             gamePaused = false;
-            serverVoteYes = false;
-
-            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.START).new AudioThread());// 播放背景音效
+            whetherContinue = false;
         }
     }
 
@@ -194,8 +176,7 @@ public class Model implements ActionListener {
             messageQueue[messageIndex] = message;
             messageIndex++;
         } else {
-            for (int i = 0; i < 7; i++)
-                messageQueue[i] = messageQueue[i + 1];
+            System.arraycopy(messageQueue, 1, messageQueue, 0, 7);
             messageQueue[7] = message;
         }
 
@@ -208,16 +189,15 @@ public class Model implements ActionListener {
             return;
 
         messageIndex--;
-        for (int i = 0; i < messageIndex; i++)
-            messageQueue[i] = messageQueue[i + 1];
+        if (messageIndex >= 0) System.arraycopy(messageQueue, 1, messageQueue, 0, messageIndex);
         messageQueue[messageIndex] = null;
 
         if (!gameStarted)
             view.mainPanel.repaint();
     }
 
-    public void setServerVoteYes(boolean serverVoteYes) {
-        this.serverVoteYes = serverVoteYes;
+    public void setWhetherContinue(boolean whetherContinue) {
+        this.whetherContinue = whetherContinue;
     }
 
     public boolean isGameStarted() {
@@ -242,5 +222,17 @@ public class Model implements ActionListener {
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+    }
+
+    public void playerMoveTowards(Direction moveDirection){
+        this.player.moveDirection(moveDirection);
+    }
+
+    public void playerStopMoveTowards(Direction moveDirection){
+        this.player.stopMoveDirection(moveDirection);
+    }
+
+    public void playerFire(boolean fire){
+        this.player.setFire(fire);
     }
 }

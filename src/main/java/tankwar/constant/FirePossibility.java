@@ -1,4 +1,4 @@
-package tankwar.enums;
+package tankwar.constant;
 
 public enum FirePossibility {
     LOW(0.90D), HIGH(0.85);

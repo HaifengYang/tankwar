@@ -2,6 +2,7 @@ package tankwar.entity;
 
 import tankwar.model.Model;
 import tankwar.utils.IoUtils;
+import tankwar.utils.MusicUtil;
 
 import java.util.Random;
 
@@ -93,6 +94,7 @@ public class Level {
 		}
 
 		gameModel.addActor(gameModel.player);
+		MusicUtil.playStartMusic();// 播放背景音效
 	}
 
 	public static void loadLevel(Model gameModel, String[] level){
@@ -154,6 +156,7 @@ public class Level {
 		enemyLeft = 20;
 		maxNoEnemy = 3;
 		noOfEnemy = 0;
+		deathCount = 0;
 	}
 
 }

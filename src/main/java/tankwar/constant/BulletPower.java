@@ -1,6 +1,4 @@
-package tankwar.enums;
-
-import tankwar.entity.Bullet;
+package tankwar.constant;
 
 public enum BulletPower {
     NORMAL(1), ENHANCED(2);

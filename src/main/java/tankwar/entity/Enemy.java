@@ -1,10 +1,8 @@
 package tankwar.entity;
 
-import tankwar.config.ThreadPoolFactory;
-import tankwar.enums.*;
+import tankwar.constant.*;
 import tankwar.model.Model;
-import tankwar.utils.AudioPlay;
-import tankwar.utils.AudioUtil;
+import tankwar.utils.MusicUtil;
 
 import java.awt.*;
 
@@ -56,27 +54,23 @@ public class Enemy implements Actor {
             firePossibility = FirePossibility.HIGH.value();
             speed = 2;
             textures = new Image[8];
-            for (int i = 0; i < 8; i++)
-                textures[i] = gameModel.textures[2 + i];
+            System.arraycopy(gameModel.textures, 2, textures, 0, 8);
         } else if (type == 2) {
             firePossibility = FirePossibility.HIGH.value();
-            speed = 4;
+            speed = 3;
             textures = new Image[8];
-            for (int i = 0; i < 8; i++)
-                textures[i] = gameModel.textures[38 + i];
+            System.arraycopy(gameModel.textures, 38, textures, 0, 8);
         } else if (type == 3) {
             firePossibility = FirePossibility.LOW.value();
             speed = 2;
             textures = new Image[8];
-            for (int i = 0; i < 8; i++)
-                textures[i] = gameModel.textures[10 + i];
+            System.arraycopy(gameModel.textures, 10, textures, 0, 8);
         } else {
             firePossibility = FirePossibility.HIGH.value();
             health = 3;
             speed = 2;
             textures = new Image[20];
-            for (int i = 0; i < 20; i++)
-                textures[i] = gameModel.textures[18 + i];
+            System.arraycopy(gameModel.textures, 18, textures, 0, 20);
 
         }
 
@@ -269,24 +263,20 @@ public class Enemy implements Actor {
             if (health == 0) {
                 death = true;
             } else {
-                ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.HIT).new AudioThread());
+                MusicUtil.playHitMusic();
                 if (health == 3) {
-                    for (int i = 0; i < 4; i++)
-                        textures[i] = textures[4 + i];
+                    System.arraycopy(textures, 4, textures, 0, 4);
                 } else if (health == 2) {
-                    for (int i = 0; i < 4; i++)
-                        textures[i] = textures[8 + i];
+                    System.arraycopy(textures, 8, textures, 0, 4);
                 } else if (health == 1) {
-                    for (int i = 0; i < 4; i++)
-                        textures[i] = textures[12 + i];
+                    System.arraycopy(textures, 12, textures, 0, 4);
                 }
                 health--;
             }
         }
 
         if (death) {
-            ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.BLAST).new AudioThread());
-            Level.noOfEnemy--;
+            MusicUtil.playBlastMusic();            Level.noOfEnemy--;
             Level.deathCount++;
             gameModel.removeActor(this);
             gameModel.addActor(new Bomb(xPos, yPos, BombType.BIG, gameModel));

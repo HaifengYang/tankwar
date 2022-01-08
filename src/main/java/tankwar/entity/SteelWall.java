@@ -1,8 +1,8 @@
 package tankwar.entity;
 
-import tankwar.enums.Orientation;
+import tankwar.constant.Direction;
 import tankwar.model.Model;
-import tankwar.enums.ActorType;
+import tankwar.constant.ActorType;
 
 import java.awt.*;
 
@@ -35,7 +35,7 @@ public class SteelWall implements Actor{
 		this.yPos = yPos;
 		steelWall = gameModel.textures[53];
 		generalBorder = new Rectangle(this.xPos - 12, this.yPos - 12, 25, 25);
-		if(orientation == Orientation.UP.value()){
+		if(orientation == Direction.UP.value()){
 			//左上角
 			border[0] = new Rectangle(this.xPos - 11, this.yPos - 11, 11, 11);
 			//右上角
@@ -44,7 +44,7 @@ public class SteelWall implements Actor{
 				shadow[2] = true;
 				shadow[3] = true;
 		}
-		if(orientation == Orientation.DOWN.value()){
+		if(orientation == Direction.DOWN.value()){
 			//左下角
 			border[2] = new Rectangle(this.xPos - 11, this.yPos + 1, 11, 11);
 			//右下角
@@ -52,7 +52,7 @@ public class SteelWall implements Actor{
 				shadow[0] = true;
 				shadow[1] = true;
 		}
-		if(orientation == Orientation.LEFT.value()){
+		if(orientation == Direction.LEFT.value()){
 			//左上角
 			border[0] = new Rectangle(this.xPos - 11, this.yPos - 11, 11, 11);
 			//左下角
@@ -60,7 +60,7 @@ public class SteelWall implements Actor{
 				shadow[1] = true;
 				shadow[3] = true;
 		}
-		if(orientation == Orientation.RIGHT.value()){
+		if(orientation == Direction.RIGHT.value()){
 			//右上角
 			border[1] = new Rectangle(this.xPos + 1, this.yPos - 11, 11, 11);
 			//右下角

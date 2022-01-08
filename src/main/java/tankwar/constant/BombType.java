@@ -1,4 +1,4 @@
-package tankwar.enums;
+package tankwar.constant;
 
 public enum BombType {
     /**
@@ -8,5 +8,5 @@ public enum BombType {
     /**
      * 小爆炸效果
      */
-    SMALL;
+    SMALL
 }

@@ -1,11 +1,10 @@
 package tankwar.entity;
 
-import tankwar.config.ThreadPoolFactory;
-import tankwar.enums.BombType;
+import tankwar.constant.BombType;
 import tankwar.model.Model;
-import tankwar.enums.ActorType;
-import tankwar.enums.Direction;
-import tankwar.utils.*;
+import tankwar.constant.ActorType;
+import tankwar.constant.Direction;
+import tankwar.utils.MusicUtil;
 
 import java.awt.*;
 
@@ -24,7 +23,7 @@ public class Bullet implements Actor{
 	private boolean hitTarget;
 
 	public Bullet(int xPos, int yPos, int direction, int speed, int bulletPower, Actor owner, Model gameModel){
-		ThreadPoolFactory.getExecutor().submit(new AudioPlay(AudioUtil.FIRE).new AudioThread());
+		MusicUtil.playFireMusic();
 		this.owner = owner;
 		this.gameModel = gameModel;
 		this.xPos = xPos;

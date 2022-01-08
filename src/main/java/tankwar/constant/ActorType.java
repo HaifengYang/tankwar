@@ -1,4 +1,4 @@
-package tankwar.enums;
+package tankwar.constant;
 
 /**
  * 游戏各个元素的类型
@@ -43,5 +43,5 @@ public enum ActorType {
     /**
      * 爆炸效果
      */
-    BOMB;
+    BOMB
 }

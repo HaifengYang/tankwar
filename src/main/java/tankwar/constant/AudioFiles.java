@@ -1,18 +1,10 @@
-package tankwar.utils;
-
-import java.applet.Applet;
-import java.applet.AudioClip;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
+package tankwar.constant;
 
 /**
  * 音效工具类
  */
 
-@SuppressWarnings("deprecation")
-public class AudioUtil{
+public class AudioFiles {
 	public static final String BASE_PATH = "";
 	/**
 	 * 坦克诞生音效
