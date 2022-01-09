@@ -193,6 +193,7 @@ public class Player implements Actor {
                                             Enemy tempe = (Enemy) gameModel.actors[j];
                                             gameModel.addActor(new Bomb(tempe.xPos, tempe.yPos, BombType.BIG, gameModel));
                                             gameModel.removeActor(gameModel.actors[j]);
+                                            gameModel.removeLastActor();
                                         }
                                 Level.noOfEnemy = 0;
                                 Level.deathCount = 20 - Level.enemyLeft;
@@ -287,12 +288,12 @@ public class Player implements Actor {
 
         //关于玩家的信息，如分数，生命等
         g.setColor(Color.yellow);
-        g.drawImage(standardImage, 520, 380, null);
-        g.drawString("x", 555, 395);
-        g.drawString(life + "", 565, 396);
+        g.drawImage(standardImage, 520, 430, null);
+        g.drawString("x", 555, 445);
+        g.drawString(life + "", 565, 446);
         String SCORE = "000000000" + scores;
-        g.drawString(" 得分:" + "", 515, 370);
-        g.drawString(SCORE.substring(SCORE.length() - 7) + "", 566, 370);
+        g.drawString(" 得分:" + "", 515, 420);
+        g.drawString(SCORE.substring(SCORE.length() - 7) + "", 566, 420);
     }
 
     public Rectangle getBorder() {
@@ -319,7 +320,7 @@ public class Player implements Actor {
                 border = new Rectangle(xPos - size, yPos - size, 25, 25);
                 xVPos = xPos;
                 yVPos = yPos;
-                MusicUtil.playGameOverMusic();//新建一个音效线程，用于播放音效
+                MusicUtil.playGameOverMusic();//播放gameOver音效
             } else {
                 direction = Direction.UP;
                 status = 1;

@@ -5,37 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="127e957f-35a6-45a5-96fb-8eb44f02d18d" name="Default Changelist" comment="代码规范化修改">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/ActorType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/AudioFiles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/BombType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/BulletPower.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/BulletSpeed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/Direction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/FirePossibility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/utils/MusicUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/EnemySign.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/bang.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/ganfire.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/constant/ActorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/ActorType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/constant/AudioFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/constant/AudioFiles.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Actor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Base.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Base.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Bullet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Grass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Grass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Level.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/PowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/PowerUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/River.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/River.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/SteelWall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/SteelWall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/entity/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/entity/Wall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/ActorType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/BombType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/BulletPower.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/BulletSpeed.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/Direction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/FirePossibility.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/enums/Orientation.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/utils/AudioUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tankwar/view/DrawingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tankwar/view/DrawingPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +30,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -78,9 +60,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/image" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/audio" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -88,6 +71,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yang\IdeaProjects\tankwar\src\main\resources\audio" />
       <recent name="C:\Users\yang\IdeaProjects\tankwar\src\main\resources\image" />
       <recent name="$PROJECT_DIR$/src/main/resources/map" />
     </key>
@@ -160,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641218270849</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="代码规范化修改">
+      <created>1641657003329</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1641657003329</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -178,6 +169,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="加快玩家坦克速度，加快敌方坦克出现速度" />
     <MESSAGE value="更换老家图像" />
     <MESSAGE value="代码规范化修改" />

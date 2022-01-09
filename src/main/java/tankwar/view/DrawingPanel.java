@@ -35,9 +35,9 @@ public class DrawingPanel extends JPanel{
 
 			//制作坦克等等
 			if(actors != null) {
-				for(int i = 0; i < actors.length; i++)
-					if(actors[i] != null) {
-						actors[i].draw(g);
+				for (Actor actor : actors)
+					if (actor != null) {
+						actor.draw(g);
 					}
 			}
 
@@ -48,7 +48,8 @@ public class DrawingPanel extends JPanel{
 			//制作级别关卡
 			g.setColor(new Color(81,111, 230));
 			g.drawString("第  " + Level.currentLevel + "  关", 527, 39);
-			g.drawString("敌人数 =  " + Level.enemyLeft, 527, 79);
+			g.drawString("敌人数 =  " + (20 - Level.deathCount), 527, 79);
+
 
 			//制作获胜场景
 			if(Level.winningCount > 150){

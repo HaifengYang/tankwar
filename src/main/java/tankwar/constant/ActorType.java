@@ -43,5 +43,9 @@ public enum ActorType {
     /**
      * 爆炸效果
      */
-    BOMB
+    BOMB,
+    /**
+     * 剩余敌方坦克影像
+     */
+    ENEMY_SIGN
 }

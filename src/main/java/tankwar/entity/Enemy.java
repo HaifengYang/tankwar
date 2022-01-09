@@ -276,9 +276,12 @@ public class Enemy implements Actor {
         }
 
         if (death) {
-            MusicUtil.playBlastMusic();            Level.noOfEnemy--;
+            MusicUtil.playBlastMusic();
+            Level.noOfEnemy--;
             Level.deathCount++;
             gameModel.removeActor(this);
+            // removeEnemySign
+            gameModel.removeLastActor();
             gameModel.addActor(new Bomb(xPos, yPos, BombType.BIG, gameModel));
         }
     }

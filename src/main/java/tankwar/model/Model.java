@@ -47,7 +47,7 @@ public class Model implements ActionListener {
         textures = new Image[88];
         for (int i = 1; i < textures.length + 1; i++)
             textures[i - 1] = Toolkit.getDefaultToolkit().getImage(Model.class.getClassLoader().getResource("image/" + i + ".jpg"));
-        actors = new Actor[400];
+        actors = new Actor[420];
         Level.loadLevel(this);
 
         player = new Player(this);
@@ -163,9 +163,25 @@ public class Model implements ActionListener {
             }
     }
 
+    public void addEnemySigns(Actor actor) {
+        for (int i = actors.length - 20; i <= actors.length - 1; i++) {
+            if (actors[i] == null) {
+                actors[i] = actor;
+                break;
+            }
+        }
+    }
+
     public void removeActor(Actor actor) {
         for (int i = 0; i < actors.length; i++)
             if (actors[i] == actor) {
+                actors[i] = null;
+                break;
+            }
+    }
+    public void removeLastActor() {
+        for (int i = actors.length - 1; i  >= 0; i--)
+            if (actors[i] != null) {
                 actors[i] = null;
                 break;
             }

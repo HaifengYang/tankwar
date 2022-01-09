@@ -13,7 +13,7 @@ public class AudioFiles {
 	/**
 	 * 爆炸音效
 	 */
-	public static final String BLAST=BASE_PATH + "audio/blast.wav";
+	public static final String BLAST=BASE_PATH + "audio/bang.wav";
 	/**
 	 * 发射子弹音效
 	 */
