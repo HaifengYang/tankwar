@@ -6,27 +6,17 @@ import tankwar.model.Model;
 import java.awt.*;
 
 public class EnemySign implements Actor {
-    private int xPos;
-    private int yPos;
+    private final int xPos;
+    private final int yPos;
     public Rectangle border;
     private final Image texture = Toolkit.getDefaultToolkit().getImage(Model.class.getClassLoader()
-            .getResource("image/" + 31 + ".jpg"));
+            .getResource("image/" + 55 + ".jpg"));
 
 
     public EnemySign(int x, int y){
         this.xPos = x;
         this.yPos = y;
         this.border = new Rectangle(-1,-1,-1,-1);
-    }
-
-    @Override
-    public void setXPos(int xPos) {
-        this.xPos = xPos;
-    }
-
-    @Override
-    public void setYPos(int yPos) {
-        this.yPos = yPos;
     }
 
     public void draw(Graphics g) {

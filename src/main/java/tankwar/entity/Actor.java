@@ -10,6 +10,4 @@ public interface Actor{
 	Rectangle getBorder();
 	Rectangle[] getDetailedBorder();
 	boolean wallDestroyed();
-	default void setXPos(int xPos){}
-	default void setYPos(int yPos){}
 }
